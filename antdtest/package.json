@@ -6,14 +6,11 @@
   "dependencies": {
     "antd": "^3.0.0",
     "moment": "^2.19.3",
+    "pixi.js": "^4.8.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
   "devDependencies": {
-    "babel-corsudo": "6.21.0",
-    "babel-loader": "6.2.10",
-    "babel-polyfill": "6.20.0",
-    "babel-preset-env": "^1.6.1",
     "atool-build": "^0.9.0",
     "atool-test-mocha": "^0.1.4",
     "babel-eslint": "^7.0.0",
@@ -29,9 +26,7 @@
     "eslint-plugin-react": "^6.4.1",
     "expect": "^1.20.1",
     "pre-commit": "1.x",
-    "redbox-react": "^1.2.6",
-    "request": "^2.83.0",
-    "webpack": "1.14.0"
+    "redbox-react": "^1.2.6"
   },
   "pre-commit": [
     "lint"
