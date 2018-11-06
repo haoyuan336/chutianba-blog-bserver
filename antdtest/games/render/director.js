@@ -14,7 +14,11 @@ class Director{
 
         loadScene.load(()=>{
             console.log('资源加载完毕');
-        })
+            this.root.stage.addChild(scene);
+            this.root.stage.removeChild(loadScene);
+            this.runningScene = scene;
+            this.runningScene.onLoad();
+        });
 
         this.root.stage.addChild(loadScene);
     }

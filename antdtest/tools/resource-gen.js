@@ -14,7 +14,7 @@ if (process.argv.length < 3){
   return
 }
 if (process.argv.length != 0){
-  resourcePath = process.argv[2] + '/images';
+  resourcePath = process.argv[2] + 'images';
 }
 console.log('resourcesPath  = ' + resourcePath);
 //合图文件目录,会解析合图json,加入resource定义中方便使用

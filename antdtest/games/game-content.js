@@ -36,9 +36,9 @@ class GameContent {
         //     document.getElementById('game-div').appendChild(this.app.view);
         // }
 
-        // let gameScene = new CutFruit();
+        let gameScene = new CutFruit();
         let loadScene = new LoadScene(resources);
-        director.startScene(loadScene,"");
+        director.startScene(loadScene,gameScene);
         
 
     }
