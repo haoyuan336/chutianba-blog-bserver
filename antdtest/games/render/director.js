@@ -16,6 +16,11 @@ class Director{
     startScene(loadScene,scene){
         // this.runningScene = scene;
 
+        if (this.runningScene){
+            this.root.stage.removeChild(this.runningScene);
+            this.runningScene = undefined;
+        }
+        this.root.stage.addChild(loadScene);
         loadScene.load(()=>{
             console.log('资源加载完毕');
             this.root.stage.addChild(scene);
@@ -24,7 +29,6 @@ class Director{
             this.runningScene.onLoad();
         });
 
-        this.root.stage.addChild(loadScene);
     }
     showApp(element){
         element.appendChild(this.root.view);

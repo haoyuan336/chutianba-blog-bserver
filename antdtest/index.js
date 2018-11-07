@@ -26,7 +26,7 @@ ReactDOM.render(
             style={{ height: '100%', borderRight: 0 }}
           >
             <SubMenu  key="sub1" title={<span><Icon type="trophy" theme="outlined" />完成的游戏</span>}>
-              <Menu.Item onClick = {itemClick} key="1">切水果</Menu.Item>
+              <Menu.Item onClick = {itemClick} key="cut-fruit">切水果</Menu.Item>
             </SubMenu>
             <SubMenu key="sub2" title={<span><Icon type="laptop" />正在做的游戏</span>}>
               <Menu.Item onClick = {itemClick} key="5">捕鱼达人</Menu.Item>

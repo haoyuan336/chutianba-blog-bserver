@@ -2,7 +2,7 @@ import * as PIXI from 'pixi.js'
 import CutFruit from './cut-fruit/src/game-scene'
 import director from './render/director'
 import LoadScene from './common/load-scene'
-import resources from './cut-fruit/resources'
+import CutFruitResources from './cut-fruit/resources'
 class GameContent {
     constructor() {
 
@@ -36,11 +36,20 @@ class GameContent {
         //     document.getElementById('game-div').appendChild(this.app.view);
         // }
 
-        let gameScene = new CutFruit();
-        let loadScene = new LoadScene(resources);
-        director.startScene(loadScene,gameScene);
-        
+        let gameMap = {
+            'cut-fruit': CutFruit
+        }
+        let resourceMap = {
+            'cut-fruit': CutFruitResources
+        }
 
+        if (gameMap[key]){
+            let gameScene = new gameMap[key];
+            let loadScene = new LoadScene(resourceMap[key]);
+            director.startScene(loadScene,gameScene);
+        }
+        
+      
     }
 }
 export default new GameContent();
