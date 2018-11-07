@@ -1,7 +1,6 @@
 import Layer from './../../render/layer'
 import global from './../../global'
 import resources from './../resources'
-import Button from './../../render/button'
 import Sprite from './../../render/sprite'
 import director from './../../render/director'
 import ReadyLayer from './ready-layer'
