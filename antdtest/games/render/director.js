@@ -1,10 +1,14 @@
 import * as PIXI from 'pixi.js'
+import TWEEN from 'tween.js'
 class Director{
     init(width, height){
         this.width = width;
         this.height = height;
         this.runningScene = undefined;
         this.root = new PIXI.Application({width: width, height: height});
+        this.root.ticker.add((delta)=>{
+            TWEEN.update();
+        })
     }
     reSetSize(width, height){
         console.log('重新设置尺寸?')
