@@ -9,6 +9,7 @@ import Fruit from './friut'
 import Vec2 from './../../common/vec2'
 import FruitType from './fruit-type'
 import TWEEN from 'tween.js'
+import CubicInter from './../../common/cubic-inter'
 class GameLayer extends Layer {
     constructor() {
         super();
@@ -47,14 +48,37 @@ class GameLayer extends Layer {
             .on('pointerupoutside', this.touchEnd.bind(this))
             .on('pointermove', this.touchMove.bind(this));
 
-        this._isTouching = false;    
+        this._isTouching = false;
+
+
+
+        this._cutTrailLayer = new Layer();
+        this.addChild(this._cutTrailLayer);
+
+
+        this._cutSize = 10;
+    
+
+        this._cutPoint = [];
+        for (let i = 0; i < this._cutSize; i++) {
+            this._cutPoint.push({
+                x: director.width * 0.5 + (this._cutSize - 1) * -0.5 * 10 + 10 * i,
+                y: director.height
+            })
+        }
+        this._cutTrail = new PIXI.mesh.Rope(global.resource[resources.blade].texture, this._cutPoint);
+        this._cutTrail.blendmode = PIXI.BLEND_MODES.ADD;
+        this._cutTrailLayer.addChild(this._cutTrail);
+
+        
+
     }
     touchStart() {
         console.log('touch start');
         this._isTouching = true;
     }
     touchMove(event) {
-        if (this._isTouching){
+        if (this._isTouching) {
             let data = event.data;
             let touchPos = data.getLocalPosition(this);
             // console.log('touch pos = ' + JSON.stringify(touchPos));
@@ -63,12 +87,14 @@ class GameLayer extends Layer {
                 let dis = new Vec2(touchPos.x, touchPos.y).distance(new Vec2(fruit.position.x, fruit.position.y));
                 // console.log('dis = ' + dis);
                 // console.log('width = ' + fruit.width);
-                if (dis < fruit.width){
-                    if (fruit.cut()){
+                if (dis < fruit.width) {
+                    if (fruit.cut()) {
                         this.playCutEffect(fruit.getType(), fruit.position);
                     }
                 }
             }
+           
+            
         }
     }
     touchEnd() {
@@ -89,6 +115,22 @@ class GameLayer extends Layer {
                 this._addFruitCurrentTime += delta;
             }
         }
+
+
+
+        let mousePoint = director.root.renderer.plugins.interaction.mouse.global;
+        this._cutPoint.shift();
+        this._cutPoint.push({
+            x: mousePoint.x,
+            y: mousePoint.y
+        });        
+        if (this._isTouching){
+            this._cutTrail.visible = true;
+        }else{
+            this._cutTrail.visible = false;
+        }
+        
+
     }
     addOneFruit() {
         //添加一个水果
@@ -114,21 +156,23 @@ class GameLayer extends Layer {
                 break;
         }
     }
-    playCutEffect(type, position){
+    playCutEffect(type, position) {
         console.log('player cut effect = ' + type);
-        let effectStr = ['_e' , '_e_2' , '_e_1'];
+        let effectStr = ['_e', '_e_2', '_e_1'];
         let str = effectStr[Math.round(Math.random() * (effectStr.length - 1))];
         let effect = new Sprite(global.resource[resources[FruitType[type] + str]].texture);
         this._cutEffectLayer.addChild(effect);
         effect.position = position;
         effect.rotation = Math.random() * Math.PI * 2;
         let action = new TWEEN.Tween(effect)
-        .to({alpha: 0}, Math.random() * 200 + 600)
-        .onComplete(()=>{
-            this._cutEffectLayer.removeChild(effect);
-        });
+            .to({ alpha: 0 }, Math.random() * 200 + 600)
+            .onComplete(() => {
+                this._cutEffectLayer.removeChild(effect);
+            });
         action.start();
 
     }
+
+   
 }
 export default GameLayer;
