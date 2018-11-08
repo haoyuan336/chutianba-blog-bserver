@@ -5,7 +5,6 @@ let gamePath = process.argv[2];
 let plistPath = gamePath + '/images/';
 const fs = require('fs');
 var parseString = require('xml2js').parseString;
-//toJson第二个参数options如下：
 const files = fs.readdirSync(plistPath);
 let plistList = [];
 files.forEach((v, k) => {
@@ -70,51 +69,11 @@ const writeJsToLocal = function (filePath, plistFileName) {
             console.log('frame dice = ', dict)
 
             for (let i = 0; i < dict.key.length; i++) {
-                // let name = dict.key[i];
-                // console.log('name = ' + name);
-                // let dictDict = dict.dict[i];
-                // console.log('dict dict ', dictDict);
-
                 let posInfo = getPosJson(dict.key[i], dict.dict[i]);
                 console.log('pos info', posInfo);
                 contentStr += '  ' + posInfo + ',\n';
             }
-            // for (let i = 0; i < dict.length; i++) {
-            //     let frame = dict[i];
-            //     let frameDict = frame.dict;
-            //     console.log('frame dict = ', frameDict);
-            // }
-            // for (let i = 0; i < dict.length; i++) {
-            //     let frame = dict[i];
-            //     let frameDict = frame.dict;
-            //     console.log('frame dict = ' , frameDict);
-            //     // for (let j = 0 ; j < frameDict[0].key.length ; j ++){
-            //     //     let name = frameDict[0].key;
-            //     //     console.log('name = ' + name);
-
-            //     // }
-
-            //     // let nameKeys = frame.dict[0].key;
-            //     // console.log('name keys = ' , frame.dict[0].key);
-            //     // for (let j = 0 ; j < frame.dict.length ; j ++){
-            //     //     let frameDict = frame.dict[j];
-            //     //     console.log('frameDict = ' , frameDict);
-            //     //     // getPosInfo(j, frameDict.dict);
-            //     //     // getName(j, frameDict.key);
-
-
-
-
-            //     // }
-            //     // for (let j = 0; j < nameKeys.length; j++) {
-            //     //     let str = nameKeys[j];
-            //     //     if (str.indexOf('.png') !== -1) {
-            //     //         let name = str.substring(0, str.length - 4);
-            //     //         // obj[name] = str;
-            //     //         contentStr =   contentStr + '    ' + '"' + name + '"' + ': ' + '"' + str + '"' + ',' + '\n';
-            //     //     }
-            //     // }
-            // }
+           
             let endStr = "{\n" + contentStr.substring(0, contentStr.length - 2) + " \n}"
             fs.writeFile(plistPath + '/' + plistFileName + '.json', endStr, () => {
                 console.log('写入成功');
