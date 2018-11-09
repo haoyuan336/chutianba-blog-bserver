@@ -1,17 +1,22 @@
 import * as PIXI from 'pixi.js'
 class Sprite extends PIXI.Sprite{
     constructor(texture, textureInfo){
-        // console.log('texture info =' , textureInfo);
         let frame = {
             x: 0,
             y: 0,
             width: texture.width,
             height: texture.height
         }
+        let rotate = 0;
         if (textureInfo){
-            frame = textureInfo? textureInfo.frame: frame;
+            frame = textureInfo.frame ? textureInfo.frame: frame;
+            rotate = textureInfo.rotate ? textureInfo.rotate: rotate;
         }
-        super(new PIXI.Texture(texture, frame,undefined ,undefined));
+        let spriteFrame = new PIXI.Texture(texture, frame, undefined, undefined, rotate);
+        texture.rotation = Math.PI;
+        super(spriteFrame);
+        this.width = rotate?frame.height: frame.width;
+        this.height = rotate?frame.width: frame.height;
         this.anchor.set(0.5);
     }
 }

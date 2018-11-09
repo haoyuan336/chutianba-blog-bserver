@@ -10,28 +10,9 @@ class Fruit extends Layer{
     constructor(){
         super();
         this._nowTime = new Date().getTime();
-        director.root.ticker.add(this.update.bind(this));
         this._state = new State();
-        // this.interactive = true;
-        // this.on('pointerdown', this.touchStart.bind(this))
-        // .on('pointerup', this.touchEnd.bind(this))
-        // .on('pointerupoutside', this.touchEnd.bind(this))
-        // .on('pointermove', this.touchMove.bind(this));
-       
-        
     }
-    // touchStart(){
-    //     console.log('touch start');
-    // }
-    // touchMove(){
-    //     if (this._state.getState() === 'run'){
-    //         this._state.setState('cut');
-
-    //     }
-    // }
-    // touchEnd(){
-
-    // }
+    
     init(controller, id){
         this._fruitId = id;
         let typeList = Object.keys(FruitType);
@@ -67,12 +48,9 @@ class Fruit extends Layer{
             this._cellRotationSpeed = Math.random() * 0.2 - 0.1;
         });
     }
-    update(){
+    update(dt){
         if (this._state.getState() === 'run' || this._state.getState() ==='cut'){
-            let currentTime = new Date().getTime();
-            let dt = currentTime - this._nowTime;
-            this._nowTime = currentTime;
-
+           
             this.position = {
                 x: this.position.x + this._direction.x * dt,
                 y: this.position.y - this._direction.y * dt
@@ -89,7 +67,6 @@ class Fruit extends Layer{
                         y: 0
                     }
                     cell.rotation += this._cellRotationSpeed;
-
                 }
             }
             if (this.position.y > director.height + 100){

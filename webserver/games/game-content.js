@@ -5,6 +5,7 @@ import director from './render/director'
 import LoadScene from './common/load-scene'
 import CutFruitResources from './cut-fruit/resources'
 import CatchFishResources from './catch-fish/resources'
+import BezierEditor from './bezier-editor/src/editor-scene'
 class GameContent {
     constructor() {
 
@@ -21,11 +22,13 @@ class GameContent {
 
         let gameMap = {
             'cut-fruit': CutFruit,
-            'catch-fish': CatchFish
+            'catch-fish': CatchFish,
+            'bezier-editor': BezierEditor
         }
         let resourceMap = {
             'cut-fruit': CutFruitResources,
-            'catch-fish': CatchFishResources
+            'catch-fish': CatchFishResources,
+            'bezier-editor': {}
         }
 
         if (gameMap[key]){

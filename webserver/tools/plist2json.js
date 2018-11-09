@@ -52,31 +52,36 @@ let getPosJson = function (name, data) {
             let key = keys[i];
             let string = stringList[i - 1];
             let stringInfo = getStringInfo(key, string);
-            console.log('string info\n', stringInfo);
             stringPos += stringInfo + ',' + '\n';
+        }else if(i == keys.length - 1){
+            //如果遍历到最后一个元素的时候
+            let value = 0;
+            if (data['true'] == ''){
+                value = 2;
+            }
+            stringPos += '    "' + keys[i] + '"' + ':' + '"' + value  + '"'+ ',\n'
         }
     }
+
+    // console.log('pos json ', data);
+    
+
     stringPos = stringPos.substring(0, stringPos.length - 2);
 
     return '"' + name + '"' + ':{\n'  +stringPos + "}"
-    console.log('string pos =\n ', stringPos);
 }
 const writeJsToLocal = function (filePath, plistFileName) {
     fs.readFile(filePath, 'utf-8', function (err, result) {
         parseString(result, (err, data) => {
             let dict = data.plist.dict[0].dict[0];
             let contentStr = "";
-            console.log('frame dice = ', dict)
-
             for (let i = 0; i < dict.key.length; i++) {
                 let posInfo = getPosJson(dict.key[i], dict.dict[i]);
-                console.log('pos info', posInfo);
                 contentStr += '  ' + posInfo + ',\n';
             }
            
             let endStr = "{\n" + contentStr.substring(0, contentStr.length - 2) + " \n}"
             fs.writeFile(plistPath + '/' + plistFileName + '.json', endStr, () => {
-                console.log('写入成功');
             })
         })
     });

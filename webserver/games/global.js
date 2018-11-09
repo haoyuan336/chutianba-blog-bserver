@@ -1,4 +1,4 @@
 const global = {
-    resource : []
+    resource: []
 };
 export default global;

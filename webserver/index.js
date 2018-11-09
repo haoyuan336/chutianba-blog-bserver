@@ -30,14 +30,14 @@ ReactDOM.render(
             </SubMenu>
             <SubMenu key="sub2" title={<span><Icon type="laptop" />正在做的游戏</span>}>
               <Menu.Item onClick = {itemClick} key="catch-fish">捕鱼达人</Menu.Item>
-  
+              <Menu.Item  onClick = {itemClick} key="sicong">校长吃鸡</Menu.Item>
             </SubMenu>
             <SubMenu key="sub3" title={<span><Icon type="notification" />打算做的游戏</span>}>
               <Menu.Item  onClick = {itemClick} key="9">斗地主</Menu.Item>
 
             </SubMenu>
             <SubMenu key="sub4" title={<span><Icon type="appstore" theme="outlined" />工具</span>}>
-              <Menu.Item onClick = {itemClick}  key="11">贝塞尔曲线编辑器</Menu.Item>
+              <Menu.Item onClick = {itemClick}  key="bezier-editor">贝塞尔曲线编辑器</Menu.Item>
         
 
 

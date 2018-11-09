@@ -8,6 +8,10 @@ class Director{
         this.root = new PIXI.Application({width: width, height: height});
         this.root.ticker.add(this.update.bind(this));
         this.nowTime = new Date().getTime();
+        this.designSize = {
+            width: width,
+            height: height
+        };
     }
     update(){
         let currentTime = new Date().getTime();

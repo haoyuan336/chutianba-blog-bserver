@@ -126,8 +126,10 @@ class GameLayer extends Layer {
         }else{
             this._cutTrail.visible = false;
         }
-        
 
+        for (let i in this._fruitMap){
+            this._fruitMap[i].update(dt);
+        }
     }
     addOneFruit() {
         //添加一个水果

@@ -5,7 +5,7 @@ class GameScene extends Scene {
     constructor() {
         super();
         console.log('进入')
-        this.setDesignSize(960, 640);
+        this.setDesignSize(1024, 640);
     }
    
     onLoad() {
