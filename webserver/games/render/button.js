@@ -1,7 +1,10 @@
 import Sprite from './sprite'
-class Button extends Sprite{
+import Layer from './layer'
+class Button extends Layer{
     constructor(spec, cb){
-        super(spec);
+        super();
+        this.normalSprite = new Sprite(spec);
+        this.addChild(this.normalSprite);
         // .on('pointerdown', onDragStart)
         // .on('pointerup', onDragEnd)
         // .on('pointerupoutside', onDragEnd)
@@ -20,19 +23,19 @@ class Button extends Sprite{
         
     }
     touchStart(){
-        this.alpha = 0.5;
+        this.normalSprite.alpha = 0.5;
     }
     touchMove(){
 
     }
     touchOut(){
-        this.alpha = 1;
+        this.normalSprite.alpha = 1;
     }
     touchEnd(){
         if (this.clickCb){
             this.clickCb();
         }
-        this.alpha = 1;
+        this.normalSprite.alpha = 1;
     }
 }
 export default Button;
