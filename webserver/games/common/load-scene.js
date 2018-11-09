@@ -12,13 +12,6 @@ class LoadScene extends PIXI.Container {
         this._resList = resList;
 
         this._totalCount = this._resList.length;
-        // this.graphics.lineStyle(2, 0xFF00FF, 1);
-        // graphics.beginFill(0xFF00BB, 0.25);
-        // graphics.drawRoundedRect(150, 450, 300, 100, 15);
-        // graphics.endFill();
-        // graphics.lineStyle(2, 0x0000FF, 1);
-        // graphics.beginFill(0xFF700B, 1);
-        // graphics.drawRect(50, 250, 120, 120); 
         this._graphics = new PIXI.Graphics();
         this.addChild(this._graphics);
         this._text = new PIXI.Text('100%', {
@@ -35,6 +28,7 @@ class LoadScene extends PIXI.Container {
         this.drawProgress((this._totalCount - this._resList.length) / this._totalCount);
         if (this._resList.length == 0) {
             if (this.loadAllCb) {
+                console.log('加载资源');
                 this.loadAllCb();
             }
             return;

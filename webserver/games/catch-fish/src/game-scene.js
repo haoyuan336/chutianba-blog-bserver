@@ -1,8 +1,15 @@
 import Scene from './../../render/scene'
-class GameScene extends Scene{
-    constructor(){
+import GameLayer from './game-layer'
+class GameScene extends Scene {
+    constructor() {
         super();
-        console.log('初始化捕鱼达人游戏')
+
+
+    }
+    onLoad() {
+        //初始化游戏层
+        let layer = new GameLayer();
+        this.addChild(layer);
     }
 }
 export default GameScene;
