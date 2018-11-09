@@ -25,7 +25,7 @@ class GameLayer extends Layer {
             this._state.setState('game-start');
         });
         this.addChild(readyLayer);
-        director.root.ticker.add(this.update.bind(this));
+        // director.root.ticker.add(this.update.bind(this));
         this._addFruitPreTimeDisList = [100, 150, 200, 200] //每次出水果的时间间隔
         this._addFruitPreTimeDis = 50;
         this.nowTime = new Date().getTime();
@@ -100,11 +100,8 @@ class GameLayer extends Layer {
     touchEnd() {
         this._isTouching = false;
     }
-    update() {
-        let currentTime = new Date().getTime();
-
-        let delta = currentTime - this.nowTime;
-        this.nowTime = currentTime;
+    update(dt) {
+        
         if (this._state.getState() === 'game-start') {
             if (this._addFruitCurrentTime > this._addFruitPreTimeDis) {
                 this._addFruitCurrentTime = 0;
@@ -112,7 +109,7 @@ class GameLayer extends Layer {
                 // console.log('add fruit pre time dis = ' + this._addFruitPreTimeDis);
                 this.addOneFruit();
             } else {
-                this._addFruitCurrentTime += delta;
+                this._addFruitCurrentTime += dt;
             }
         }
 

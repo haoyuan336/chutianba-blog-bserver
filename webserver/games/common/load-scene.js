@@ -41,7 +41,8 @@ class LoadScene extends PIXI.Container {
         } else {
             loader.add(url)
             loader.load((load, resource) => {
-                global.resource = resource;
+                // global.resource = resource;
+                global.resource[url] = resource[url];
                 this._loadRes(loader, resList);
             });
         }

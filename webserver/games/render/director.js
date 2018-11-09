@@ -6,9 +6,18 @@ class Director{
         this.height = height;
         this.runningScene = undefined;
         this.root = new PIXI.Application({width: width, height: height});
-        this.root.ticker.add((delta)=>{
-            TWEEN.update();
-        })
+        this.root.ticker.add(this.update.bind(this));
+        this.nowTime = new Date().getTime();
+    }
+    update(){
+        let currentTime = new Date().getTime();
+        let dt = currentTime - this.nowTime;
+        this.nowTime = currentTime;
+        if (this.runningScene){
+            this.runningScene.update(dt);
+        }
+        TWEEN.update();
+
     }
     reSetSize(width, height){
         console.log('重新设置尺寸?')
@@ -18,6 +27,7 @@ class Director{
 
         if (this.runningScene){
             this.root.stage.removeChild(this.runningScene);
+            this.runningScene.destroy();
             this.runningScene = undefined;
         }
         this.root.stage.addChild(loadScene);

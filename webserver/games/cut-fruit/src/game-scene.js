@@ -9,7 +9,7 @@ class GameScene extends Scene{
     }
     onLoad(){
         let _gameLayer = new GameLayer();
-        this.addChild(_gameLayer);
+        this.addLayer(_gameLayer);
     }
     
 }

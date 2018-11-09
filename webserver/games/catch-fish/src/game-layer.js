@@ -12,7 +12,6 @@ class GameLayer extends Layer {
         //第一步先放一个背景
         let bg = new Sprite(global.resource[resources.game_bg].texture);
         this.addChild(bg);
-        bg.scale.set(0.8);
         bg.anchor.set(0);
         //放一个鱼元素
         let textInfo = new TextureInfo(resources.json_texturepacker, texturePackerResMap.bottomBar);
@@ -24,12 +23,12 @@ class GameLayer extends Layer {
         // this.addChild(sp);
 
 
-        // let sp1 = new Sprite(global.resource[resources.texturespack].texture, new TextureInfo(resources.json_texturepacker, texturePackerResMap['fish_jinshayu_run_' + 7]));
-        // sp1.position = {
-        //     x: director.width * 0.5,
-        //     y: 200
-        // }
-        // this.addChild(sp1);
+        let sp1 = new Sprite(global.resource[resources.texturespack].texture, new TextureInfo(resources.json_texturepacker, texturePackerResMap['fish_jinshayu_run_' + 7]));
+        sp1.position = {
+            x: director.width * 0.5,
+            y: 200
+        }
+        this.addChild(sp1);
     }
 }
 export default GameLayer;

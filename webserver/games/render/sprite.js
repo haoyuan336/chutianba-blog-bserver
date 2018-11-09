@@ -11,7 +11,7 @@ class Sprite extends PIXI.Sprite{
         if (textureInfo){
             frame = textureInfo? textureInfo.frame: frame;
         }
-        super(new PIXI.Texture(texture, frame));
+        super(new PIXI.Texture(texture, frame,undefined ,undefined));
         this.anchor.set(0.5);
     }
 }

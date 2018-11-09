@@ -8,8 +8,8 @@ class TextureInfo {
         this.frame = {
             x: texturePos[0],
             y: texturePos[1],
-            width: texturePos[2],
-            height: texturePos[3]
+            width: texturePos[3],
+            height: texturePos[2]
         }
     }
 }
