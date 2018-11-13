@@ -1,15 +1,14 @@
-import Layer from './../../render/layer'
+import Layer from './../../../util/render/layer'
 import global from './../../global'
 import resources from './../resources'
-import Sprite from './../../render/sprite'
-import director from './../../render/director'
+import Sprite from './../../../util/render/sprite'
+import director from './../../../util/render/director'
 import ReadyLayer from './ready-layer'
 import State from './../../common/state'
 import Fruit from './friut'
-import Vec2 from './../../common/vec2'
+import Vec2 from './../../../util/math/vec2'
 import FruitType from './fruit-type'
 import TWEEN from 'tween.js'
-import CubicInter from './../../common/cubic-inter'
 class GameLayer extends Layer {
     constructor() {
         super();

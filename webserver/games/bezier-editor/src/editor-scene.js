@@ -1,4 +1,4 @@
-import Scene from './../../render/scene'
+import {Scene} from './../../../util/import'
 import EditorLayer from './editor-layer'
 class BezierScene extends Scene{
     constructor(){

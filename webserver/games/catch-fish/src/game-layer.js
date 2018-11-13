@@ -1,5 +1,5 @@
-import Layer from './../../render/layer'
-import Sprite from './../../render/sprite'
+import Layer from './../../../util/render/layer'
+import Sprite from './../../../util/render/sprite'
 import resources from './../resources'
 import global from './../../global'
 import Fish from './fish'

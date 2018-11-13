@@ -1,6 +1,5 @@
-import * as PIXI from 'pixi.js'
 import GameLayer from './game-layer'
-import Scene from './../../render/scene'
+import Scene from './../../../util/render/scene'
 class GameScene extends Scene{
     constructor(){
         super();

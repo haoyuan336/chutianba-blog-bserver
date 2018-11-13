@@ -1,10 +1,10 @@
 
-import Layer from './../../render/layer'
-import Sprite from './../../render/sprite'
+import Layer from './../../../util/render/layer'
+import Sprite from './../../../util/render/sprite'
 import FruitType from './fruit-type'
 import global from './../../global'
 import resources from './../resources'
-import director from './../../render/director'
+import director from './../../../util/render/director'
 import State from './../../common/state'
 class Fruit extends Layer{
     constructor(){

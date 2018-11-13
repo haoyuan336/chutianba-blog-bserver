@@ -1,9 +1,9 @@
-import Layer from './../../render/layer'
+import Layer from './../../../util/render/layer'
 import global from './../../global'
 import resources from './../resources'
-import Button from './../../render/button'
-import Sprite from './../../render/sprite'
-import director from './../../render/director'
+import Button from './../../../util/render/button'
+import Sprite from './../../../util/render/sprite'
+import director from './../../../util/render/director'
 import TWEEN from 'tween.js'
 class ReadyLayer extends Layer {
     constructor(readyCb) {
