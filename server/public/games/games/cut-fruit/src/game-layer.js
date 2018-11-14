@@ -1,15 +1,10 @@
-import Layer from './../../render/layer'
 import global from './../../global'
 import resources from './../resources'
-import Sprite from './../../render/sprite'
-import director from './../../render/director'
-import ReadyLayer from './ready-layer'
 import State from './../../common/state'
 import Fruit from './friut'
-import Vec2 from './../../common/vec2'
 import FruitType from './fruit-type'
 import TWEEN from 'tween.js'
-import CubicInter from './../../common/cubic-inter'
+import {Layer, Sprite, director, Vec2} from './../../../util/import'
 class GameLayer extends Layer {
     constructor() {
         super();
@@ -18,13 +13,7 @@ class GameLayer extends Layer {
         this._addFruitCurrentTime = 0;
         let bg = new PIXI.Sprite(global.resource[resources.bj].texture);
         this.addChild(bg);
-        let readyLayer = new ReadyLayer(() => {
-            this.removeChild(readyLayer);
-            //把准备层删掉
-            this._addFruitCurrentTime = new Date().getTime();
-            this._state.setState('game-start');
-        });
-        this.addChild(readyLayer);
+  
         // director.root.ticker.add(this.update.bind(this));
         this._addFruitPreTimeDisList = [100, 150, 200, 200] //每次出水果的时间间隔
         this._addFruitPreTimeDis = 50;
@@ -43,14 +32,7 @@ class GameLayer extends Layer {
         this.addChild(this._particleLayer);
 
         this.interactive = true;
-        this.on('pointerdown', this.touchStart.bind(this))
-            .on('pointerup', this.touchEnd.bind(this))
-            .on('pointerupoutside', this.touchEnd.bind(this))
-            .on('pointermove', this.touchMove.bind(this));
-
         this._isTouching = false;
-
-
 
         this._cutTrailLayer = new Layer();
         this.addChild(this._cutTrailLayer);
@@ -73,20 +55,21 @@ class GameLayer extends Layer {
         
 
     }
-    touchStart() {
-        console.log('touch start');
+    startGame(){
+        this._addFruitCurrentTime = new Date().getTime();
+        this._state.setState('game-start');
+    }
+    onTouchStart() {
         this._isTouching = true;
     }
-    touchMove(event) {
+    onTouchMove(event) {
         if (this._isTouching) {
             let data = event.data;
             let touchPos = data.getLocalPosition(this);
-            // console.log('touch pos = ' + JSON.stringify(touchPos));
             for (let i in this._fruitMap) {
                 let fruit = this._fruitMap[i];
-                let dis = new Vec2(touchPos.x, touchPos.y).distance(new Vec2(fruit.position.x, fruit.position.y));
-                // console.log('dis = ' + dis);
-                // console.log('width = ' + fruit.width);
+                let dis = new Vec2(touchPos.x, touchPos.y).distance(fruit.position);
+       
                 if (dis < fruit.width) {
                     if (fruit.cut()) {
                         this.playCutEffect(fruit.getType(), fruit.position);
@@ -97,7 +80,7 @@ class GameLayer extends Layer {
             
         }
     }
-    touchEnd() {
+    onTouchEnd() {
         this._isTouching = false;
     }
     update(dt) {
@@ -112,9 +95,6 @@ class GameLayer extends Layer {
                 this._addFruitCurrentTime += dt;
             }
         }
-
-
-
         let mousePoint = director.root.renderer.plugins.interaction.mouse.global;
         this._cutPoint.shift();
         this._cutPoint.push({
@@ -148,8 +128,6 @@ class GameLayer extends Layer {
                     this._fruitLayer.removeChild(this._fruitMap[fruitId]);
                     delete this._fruitMap[fruitId];
                 }
-
-
                 break;
             default:
                 break;

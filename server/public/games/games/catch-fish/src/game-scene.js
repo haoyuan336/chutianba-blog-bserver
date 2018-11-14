@@ -1,6 +1,5 @@
-import Scene from './../../render/scene'
+import Scene from './../../../util/render/scene'
 import GameLayer from './game-layer'
-import director from './../../render/director'
 class GameScene extends Scene {
     constructor() {
         super();

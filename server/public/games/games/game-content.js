@@ -1,11 +1,12 @@
-import * as PIXI from 'pixi.js'
 import CutFruit from './cut-fruit/src/game-scene'
 import CatchFish from './catch-fish/src/game-scene'
-import director from './render/director'
 import LoadScene from './common/load-scene'
 import CutFruitResources from './cut-fruit/resources'
 import CatchFishResources from './catch-fish/resources'
 import BezierEditor from './bezier-editor/src/editor-scene'
+
+import {director} from './../util/import'
+
 class GameContent {
     constructor() {
 
