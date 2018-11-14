@@ -1,5 +1,5 @@
 class Vec2 {
-  constructor () {
+  constructor() {
     this.x = 0
     this.y = 0
     if (arguments.length === 2) {
@@ -7,7 +7,7 @@ class Vec2 {
       this.y = arguments[1]
     }
   }
-  set () {
+  set() {
     if (arguments.length === 0) {
       return
     }
@@ -19,18 +19,18 @@ class Vec2 {
       this.y = arguments[1]
     }
   }
-  sub () {
+  sub() {
     let v = new Vec2(this.x, this.y)
     if (arguments.length === 1) {
-      v.x -= arguments[0]
-      v.y -= arguments[0]
+      v.x -= arguments[0].x,
+        v.y -= arguments[0].y
     } else {
-      v.x -= arguments[0]
-      v.y -= arguments[1]
+      v.x -= arguments[0];
+      v.y -= arguments[1];
     }
     return v
   }
-  add (object) {
+  add(object) {
     let v = new Vec2(this.x, this.y)
     if (typeof (object) === 'object') {
       v.x += object.x
@@ -47,13 +47,13 @@ class Vec2 {
 
     return v
   }
-  isZero () {
+  isZero() {
     if (this.x === 0 && this.y === 0) {
       return true
     }
     return false
   }
-  rotation (object, angle) {
+  rotation(object, angle) {
     // 向量转一个角度
     let sinAngle = Math.sin(angle)
     let cosAngle = Math.cos(angle)
@@ -73,7 +73,7 @@ class Vec2 {
 
     return new Vec2(x, y)
   };
-  getNormal () {
+  getNormal() {
     let n = this.x * this.x + this.y * this.y
     if (n === 1) {
       return this
@@ -87,19 +87,19 @@ class Vec2 {
     let y = this.y * n
     return new Vec2(x, y)
   }
-  multi (value) {
+  multi(value) {
     return new Vec2(value * this.x, value * this.y)
   }
-  distance () {
+  distance() {
     // let l = this.x * this.x +
     let object = undefined;
-    if (arguments.length == 1){
+    if (arguments.length == 1) {
       object = arguments[0];
-    }else{
+    } else {
       object = {
         x: arguments[0],
         y: arguments[1]
-      } 
+      }
     }
     let a = (this.x - object.x) * (this.x - object.x) + (this.y - object.y) * (this.y - object.y)
     let l = Math.sqrt(a)
@@ -110,5 +110,77 @@ class Vec2 {
 
     return l
   }
+  // getAngle() {
+  //   let vec = undefined;
+  //   if (arguments.length == 1) {
+  //     vec = new Vec2(arguments[0].x, arguments[0].y);
+  //   } else {
+  //     vec = new Vec2(arguments[0], arguments[1]);
+  //   }
+  //   let cross = vec.x * this.x + vec.y * this.y;
+  //   let multi = Math.sqrt(vec.x * vec.x + vec.y * vec.y) * Math.sqrt(this.x * this.x  + this.y * this.y);
+  //   let angle = Math.acos(cross / multi);
+  //   return angle;
+  // }
+
+
+  cross  () {
+    //向量积
+    let object = undefined;
+    if (arguments.length == 1){
+      object = {
+        x: arguments[0].x,
+        y: arguments[0].y
+      }
+    }else{
+      object = {
+        x: arguments[0],
+        y: arguments[1]
+      }
+    }
+    return this.x * object.y - this.y * object.x;
+  }
+  dot () {
+    //点积
+    let object = undefined;
+    if (arguments.length == 1){
+      object = {
+        x: arguments[0].x,
+        y: arguments[0].y
+      }
+    }else{
+      object = {
+        x: arguments[0],
+        y: arguments[1]
+      }
+    }
+    return this.x * object.x + this.y * object.y;
+  }
+  getRadians () {
+    //得到向量弧度
+    let object = undefined;
+    if (arguments.length == 1){
+      object = {
+        x: arguments[0].x,
+        y: arguments[0].y
+      }
+    }else{
+      object = {
+        x: arguments[0],
+        y: arguments[1]
+      }
+    }
+
+    let v = new Vec2(object.x, object.y);
+    let a = this.getNormal();
+    let b = v.getNormal();
+
+    let angle = Math.atan2(a.cross(b), a.dot(b));
+    // console.log('angle = ' + angle);
+    if (Math.abs(angle) < Number.MIN_VALUE) {
+      return 0
+    }
+    return angle;
+  };
 }
 export default Vec2

@@ -19,15 +19,15 @@ class GameLayer extends Layer {
         this._fishPoolList = [];
         //初始化 浴池列表
 
-        let fish = new Fish('jinshayu');
-        this.addChild(fish);
-        this._fishMap[this._fishIdCount] = fish;
-        this._fishIdCount++;
+        // let fish = new Fish('jinshayu');
+        // this.addChild(fish);
+        // this._fishMap[this._fishIdCount] = fish;
+        // this._fishIdCount++;
     }
     update(dt) {
         if (this._addFishTime > 1000) {
             this._addFishTime = 0;
-            // this.addFish();
+            this.addFish();
         } else {
             this._addFishTime += dt;
         }
@@ -57,6 +57,17 @@ class GameLayer extends Layer {
         }
         return list;
     }
+    fishOver(type, index) {
+        switch (type) {
+            case 'run-end':
+                console.log('删除鱼');
+                this.removeChild(this._fishMap[index]);
+                delete this._fishMap[index];
+                break;
+            default:
+                break;
+        }
+    }
     addFish() {
 
         //每条鱼出现的概率
@@ -64,7 +75,11 @@ class GameLayer extends Layer {
             this._fishPoolList = this.getFishPoolList();
         }
         let fishName = this._fishPoolList.pop();
-        let fish = new Fish(fishName);
+        let fish = new Fish({
+            fishName: fishName,
+            index: this._fishIdCount,
+            controller: this
+        });
         this.addChild(fish);
         this._fishMap[this._fishIdCount] = fish;
         this._fishIdCount++;

@@ -13,7 +13,7 @@ ReactDOM.render(
     <Layout>
       <Header className="header">
         <div className="logo">
-        <label style={{color:"#ffffff" ,fontSize: "40px"}}><strong>学习React</strong></label>
+        <label style={{color:"#ffffff" ,fontSize: "40px"}}><strong>小游戏合集</strong></label>
         </div>
       </Header>
       <Layout>

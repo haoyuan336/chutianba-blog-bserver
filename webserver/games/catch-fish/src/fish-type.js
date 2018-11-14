@@ -26,6 +26,7 @@ const FishWeight = {
     shuimu: 10
 }
 const FishPath = {
-    fish_path_0: resources.json_fish_path_0
+    fish_path_0: resources.json_fish_path_0,
+    fish_path_1: resources.json_fish_path_1
 };
 export { FishType, FishWeight, FishPath };
