@@ -1,47 +1,10 @@
 import * as PIXI from 'pixi.js'
-// import 
+import Vec2 from './../math/vec2'
+import Rect from './../math/rect'
 const ShapeType = {
     Circle: 1,
     Rect: 2
 }
-class Shape {
-    constructor() {
-        let type = arguments[0];
-        this.type = type;
-        this.style = new Style();
-        switch (type) {
-            case ShapeType.Circle:
-                this.x = arguments[1];
-                this.y = arguments[2];
-                this.radiu = arguments[3];
-                this.style = arguments[4];
-                break;
-            case ShapeType.Rect:
-                this.x = arguments[1];
-                this.y = arguments[2];
-                this.width = arguments[3];
-                this.heigth = arguments[4];
-                this.style = arguments[5]
-                break;
-            default:
-                break;
-        }
-    }
-    isContain() {
-        let x = 0;
-        let y = 0;
-        if (arguments.length == 2) {
-            x = arguments[0];
-            y = arguments[1];
-        }
-        if (arguments.length == 1){
-            x = arguments[0].x;
-            y = arguments[0].y;
-        }
-    }
-};
-
-
 class Style {
     constructor() {
         this.fill = 0xFFFFFF;
@@ -59,6 +22,69 @@ class Style {
         }
     }
 }
+class Shape {
+    constructor() {
+        let type = arguments[0];
+        this.type = type;
+        this.style = new Style();
+        switch (type) {
+            case ShapeType.Circle:
+                this.x = arguments[1];
+                this.y = arguments[2];
+                this.radiu = arguments[3];
+                this.style = arguments[4] ? arguments[4] : this.style;
+
+                break;
+            case ShapeType.Rect:
+                this.x = arguments[1];
+                this.y = arguments[2];
+                this.width = arguments[3];
+                this.heigth = arguments[4];
+                this.style = arguments[5] ? arguments[5] : this.style;
+                break;
+            default:
+                break;
+        }
+    }
+    isContain() {
+        let x = 0;
+        let y = 0;
+        if (arguments.length == 2) {
+            x = arguments[0];
+            y = arguments[1];
+        }
+        if (arguments.length == 1) {
+            x = arguments[0].x;
+            y = arguments[0].y;
+        }
+
+
+        switch (this.type) {
+            case ShapeType.Circle:
+                let vec = new Vec2(x, y);
+                let dis = vec.distance(this.x, this.y);
+                if (dis < this.radiu) {
+                    return true;
+                }
+                break;
+            case ShapeType.Rect:
+                let rect = new Rect(this.x, this.y, this.width, this.heigth);
+                if (rect.isContain(x, y)){
+                    return true;
+                }
+                break;
+            default:
+                break;
+        }
+
+        return false;
+
+
+    }
+};
+
+
+
 class Graphics extends PIXI.Graphics {
     constructor() {
         super();
@@ -67,12 +93,12 @@ class Graphics extends PIXI.Graphics {
     update(dt) {
         this.draw();
     }
-    // rectDraw(x, y, width, hieght, param) {
-    //     let style = new Style(param);
-    //     this.lineStyle(style.lineWidth, style.lineColor, style.lineAlpha);
-    //     this.beginFill(style.fill, style.fillAlpha);
-    //     this.drawRect(x, y, width, hieght);
-    // }
+    rectDraw(x, y, width, hieght, param) {
+        let style = new Style(param);
+        this.lineStyle(style.lineWidth, style.lineColor, style.lineAlpha);
+        this.beginFill(style.fill, style.fillAlpha);
+        this.drawRect(x, y, width, hieght);
+    }
     // circleDraw(x, y, radiu, param) {
     //     let style = new Style(param);
     //     this.lineStyle(style.lintWidth);
@@ -85,7 +111,6 @@ class Graphics extends PIXI.Graphics {
         for (let i = 0; i < this._childList.length; i++) {
             let child = this._childList[i];
             let style = child.style;
-            console.log('style', style);
             switch (child.type) {
                 case ShapeType.Circle:
                     this.lineStyle(style.lineWidth, style.lineColor, style.lineAlpha);
@@ -104,6 +129,16 @@ class Graphics extends PIXI.Graphics {
     }
     addChild(child) {
         this._childList.push(child);
+    }
+    removeAllChild(){
+        this._childList = [];
+    }
+    removeChild(child){
+        this._childList.forEach((v , k)=>{
+            if (child === v){
+                this._childList.splice(k, 1);
+            }
+        });
     }
 }
 export { Graphics, Style, Shape, ShapeType };

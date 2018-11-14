@@ -6,7 +6,7 @@ import Layer from './render/layer'
 import Scene from './render/scene'
 import Sprite from './render/sprite'
 
-import CubicInter from './math/cubic-inter'
+import Bezier from './math/bezier'
 import Rect from './math/rect'
 import Vec2 from './math/vec2'
-export {Animate, Button, director, Layer, Scene, Sprite, CubicInter, Rect, Vec2};
+export {Animate, Button, director, Layer, Scene, Sprite, Bezier, Rect, Vec2};

@@ -1,41 +1,110 @@
 import Sprite from './sprite'
 import Layer from './layer'
-class Button extends Layer{
-    constructor(spec, cb){
+import Label from './label'
+import { Graphics, Shape, Style, ShapeType } from './graphics'
+const TouchType = {
+    Sprite: 1,
+    Scale: 2,
+    Alpha: 3
+}
+class Button extends Layer {
+    constructor(spec, cb) {
         super();
-        this.normalSprite = new Sprite(spec);
-        this.addChild(this.normalSprite);
-        // .on('pointerdown', onDragStart)
-        // .on('pointerup', onDragEnd)
-        // .on('pointerupoutside', onDragEnd)
-        // .on('pointermove', onDragMove);
-        this.interactive = true;
-        this.clickCb = ()=>{};
-        if (cb){
-            console.log('有回调');
-            this.clickCb = cb;
-        }else{
-            console.log('无回调');
+
+        this._buttonStyle = {
+            text: '',
+            touchType: TouchType.Scale,
+
+            normalTexture: undefined,
+            pressedTexture: undefined,
+
+            normalScale: 1,
+            pressedScale: 1.2,
+
+            normalAlpha: 1,
+            pressedAlpha: 0.5,
+            touchCb: () => {
+
+            }
+
         }
-        this.on('pointerdown', this.touchStart.bind(this));
-        this.on('pointerup', this.touchEnd.bind(this));
-        this.on('pointerupoutside', this.touchOut.bind(this));
-        
-    }
-    touchStart(){
-        this.normalSprite.alpha = 0.5;
-    }
-    touchMove(){
+
+        if (spec) {
+            for (let i in this._buttonStyle) {
+                let key = i;
+                this._buttonStyle[key] = spec[key] ? spec[key] : this._buttonStyle[key];
+            }
+
+        }
+
+        if (this._buttonStyle.normalTexture) {
+            this._sprite = new Sprite(this._buttonStyle.normalTexture);
+            this.addChild(this._sprite);
+        } else {
+            // this._shape = new Shape(ShapeType.Rect, 0,0, 400,400);
+            // this._graphics = new Graphics();
+            // this.addChild(this._graphics);
+            // this._graphics.addChild(this._shape);
+            this._graphics = new Graphics();
+            this.addChild(this._graphics);
+            this._graphics.rectDraw(-50, - 30, 100, 60);
+        }
+
+        let label = new Label(this._buttonStyle.text, {
+            fontSize: 30
+        });
+        label.anchor.set(0.5)
+        this.addChild(label);
+
+        this.interactive = true;
+        this.buttonMode = true;
 
     }
-    touchOut(){
-        this.normalSprite.alpha = 1;
+    update() {
     }
-    touchEnd(){
-        if (this.clickCb){
-            this.clickCb();
+    onTouchStart() {
+        switch (this._buttonStyle.touchType) {
+            case TouchType.Sprite:
+                this._sprite.texture = this.pressedTexture;
+                break;
+            case TouchType.Scale:
+                this.scale.set(this._buttonStyle.pressedScale);
+                // if (this._sprite) {
+                //     this._sprite.scale.set(this._buttonStyle.pressedScale);
+
+                // }
+                // if (this._graphics) {
+                //     console.log('重画');
+                //     this.                    
+                // }
+                break;
+            case TouchType.Alpha:
+                this._sprite.alpha = this.pressedAlpha;
+                break;
+            default:
+                break;
         }
-        this.normalSprite.alpha = 1;
+    }
+    onTouchEnd() {
+        switch (this._buttonStyle.touchType) {
+            case TouchType.Sprite:
+                this._sprite.texture = this.normalTexture;
+
+                break;
+            case TouchType.Scale:
+                this.scale.set(this._buttonStyle.normalScale)
+                break;
+            case TouchType.Alpha:
+                this.scale.set(this._buttonStyle.normalAlpha);
+                break;
+            default:
+                break;
+        }
+
+        if (this._buttonStyle.touchCb) {
+            this._buttonStyle.touchCb();
+        }
     }
 }
+Button.TouchType = TouchType
 export default Button;

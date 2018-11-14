@@ -1,5 +1,6 @@
 import {Scene} from './../../../util/import'
 import EditorLayer from './editor-layer'
+import UILayer from './ui-layer'
 class BezierScene extends Scene{
     constructor(){
         super();
@@ -9,6 +10,8 @@ class BezierScene extends Scene{
     onLoad(){   
         let layer = new EditorLayer();
         this.addLayer(layer);
+        let uiLayer = new UILayer(layer);
+        this.addChild(uiLayer);
     }
 }
 export default BezierScene;

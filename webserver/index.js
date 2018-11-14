@@ -32,7 +32,7 @@ ReactDOM.render(
               <Menu.Item onClick = {itemClick} key="catch-fish">捕鱼达人</Menu.Item>
               <Menu.Item  onClick = {itemClick} key="catchfish-online">多人在线捕鱼达人</Menu.Item>
               <Menu.Item  onClick = {itemClick} key="sicong">校长吃鸡</Menu.Item>
-              <Menu.Item  onClick = {itemClick} key="sicong">校长飞镖</Menu.Item>
+              <Menu.Item  onClick = {itemClick} key="sicong-nify">校长飞镖</Menu.Item>
               <Menu.Item  onClick = {itemClick} key="snake-">贪吃蛇</Menu.Item>
               <Menu.Item  onClick = {itemClick} key="snake-online">贪吃蛇online</Menu.Item>
               <Menu.Item  onClick = {itemClick} key="fly-fight-online">飞机大战</Menu.Item>

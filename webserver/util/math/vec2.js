@@ -90,8 +90,17 @@ class Vec2 {
   multi (value) {
     return new Vec2(value * this.x, value * this.y)
   }
-  distance (object) {
+  distance () {
     // let l = this.x * this.x +
+    let object = undefined;
+    if (arguments.length == 1){
+      object = arguments[0];
+    }else{
+      object = {
+        x: arguments[0],
+        y: arguments[1]
+      } 
+    }
     let a = (this.x - object.x) * (this.x - object.x) + (this.y - object.y) * (this.y - object.y)
     let l = Math.sqrt(a)
     let w = parseInt(l)
