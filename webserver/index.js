@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 import GameContent from './games/game-content'
 import gameContent from './games/game-content';
+import Code from './pages/code'
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 const itemClick = function(obj){
@@ -79,7 +80,10 @@ ReactDOM.render(
                 width: "800px",
                 height: "480px"
                 
-            }}></div>
+            }}>
+            
+              {/* <a href=""></a> */}
+            </div>
 
           </Content>
         </Layout>,

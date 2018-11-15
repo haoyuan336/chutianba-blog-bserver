@@ -18,6 +18,23 @@ class Sprite extends PIXI.Sprite{
         this.width = rotate?frame.height: frame.width;
         this.height = rotate?frame.width: frame.height;
         this.anchor.set(0.5);
+
+        this.on('pointerdown', this.onTouchStart.bind(this))
+            .on('pointerup', this.onTouchEnd.bind(this))
+            .on('pointerupoutside', this.onTouchEnd.bind(this))
+            .on('pointermove', this.onTouchMove.bind(this));
+    }
+    update(dt){
+
+    }
+    onTouchStart(){
+
+    }
+    onTouchMove(){
+
+    }
+    onTouchEnd(){
+        
     }
 }
 export default Sprite;
