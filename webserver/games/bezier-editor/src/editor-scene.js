@@ -11,7 +11,7 @@ class BezierScene extends Scene{
         let layer = new EditorLayer();
         this.addLayer(layer);
         let uiLayer = new UILayer(layer);
-        this.addChild(uiLayer);
+        this.addLayer(uiLayer);
     }
 }
 export default BezierScene;

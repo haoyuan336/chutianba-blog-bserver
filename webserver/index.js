@@ -9,9 +9,10 @@ const itemClick = function(obj){
     console.log('click' + obj.key);
     GameContent.showGame(obj.key);
 }
-let randomList =  ['cut-fruit', 'catch-fish']
+// let randomList =  ['cut-fruit', 'catch-fish']
 
-GameContent.showGame(randomList[Math.round(Math.random() * (randomList.length - 1))]);
+// GameContent.showGame(randomList[Math.round(Math.random() * (randomList.length - 1))]);
+GameContent.showGame('sicong');
 ReactDOM.render(
     <Layout>
       <Header className="header">
