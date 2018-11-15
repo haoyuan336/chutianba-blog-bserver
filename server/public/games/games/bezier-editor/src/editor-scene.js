@@ -5,7 +5,7 @@ class BezierScene extends Scene{
     constructor(){
         super();
         console.log('初始化贝塞尔曲线编辑器');
-        this.setDesignSize(1440, 810);
+        this.setDesignSize(1920, 1280);
     }
     onLoad(){   
         let layer = new EditorLayer();

@@ -4,6 +4,7 @@ import resources from './../resources'
 import global from './../../global'
 import Fish from './fish'
 import { FishType, FishWeight } from './fish-type'
+import UILayer from './ui-layer'
 class GameLayer extends Layer {
     constructor() {
         super();
@@ -23,6 +24,12 @@ class GameLayer extends Layer {
         // this.addChild(fish);
         // this._fishMap[this._fishIdCount] = fish;
         // this._fishIdCount++;
+        this._fishLayer = new Layer();
+        this.addChild(this._fishLayer);
+
+        this._uiLayer = new UILayer(this);
+        this.addChild(this._uiLayer);
+        
     }
     update(dt) {
         if (this._addFishTime > 1000) {
@@ -60,8 +67,9 @@ class GameLayer extends Layer {
     fishOver(type, index) {
         switch (type) {
             case 'run-end':
-                console.log('删除鱼');
-                this.removeChild(this._fishMap[index]);
+                // console.log('删除鱼');
+                // this.removeChild(this._fishMap[index]);
+                this._fishLayer.removeChild(this._fishMap[index]);
                 delete this._fishMap[index];
                 break;
             default:
@@ -80,9 +88,9 @@ class GameLayer extends Layer {
             index: this._fishIdCount,
             controller: this
         });
-        this.addChild(fish);
         this._fishMap[this._fishIdCount] = fish;
         this._fishIdCount++;
+        this._fishLayer.addChild(fish);
     }
 }
 export default GameLayer;

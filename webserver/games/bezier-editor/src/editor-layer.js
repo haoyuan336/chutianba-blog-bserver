@@ -7,13 +7,13 @@ class EditorLayer extends Layer {
         this.addChild(this.graphics);
         this.interactive = true;
 
-        let bgRect = new Shape(ShapeType.Rect, 0, 0, 1440, 900, new Style({
+        let bgRect = new Shape(ShapeType.Rect, 0, 0, 1920, 1280, new Style({
             fill: 0xFFFFFF,
             alpha: 0.4
         }));
         this.graphics.addChild(bgRect);
 
-        let rect = new Shape(ShapeType.Rect, 200, 100, 1024, 640, new Style({
+        let rect = new Shape(ShapeType.Rect, 1920 * 0.5 -1024 * 0.5,1280 * 0.5 -660 * 0.5, 1024, 640, new Style({
             fill: 0xFFFFFF,
             alpha: 0.5,
             lineWidth: 6,
@@ -101,8 +101,8 @@ class EditorLayer extends Layer {
         let pathList = [];
         for (let i = 0 ; i < this._pointList.length ; i ++){
             pathList.push({
-                x: this._pointList[i].x,
-                y: this._pointList[i].y
+                x: this._pointList[i].x - (1920 * 0.5 - 1024 * 0.5),
+                y: this._pointList[i].y - (1280 * 0.5 - 640 * 0.5)
             })
         }
 

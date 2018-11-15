@@ -44,7 +44,7 @@ class Fish extends Animate {
         super(textureList);
         this._index = index;
         this._controller = controller;
-        this._index = spec.index; 
+        this._index = spec.index;
 
         this._textureInfoList = textureInfoList;
         this.loop = false;
@@ -62,13 +62,15 @@ class Fish extends Animate {
 
         this._state = new State();
         this._state.addState('run', () => {
+
+
             this.play();
         })
         this._state.addState('dead', () => {
             this.gotoAndPlay(this.animateFrameNum.dead.start);
         });
 
-        this._state.addState('run-end', ()=>{
+        this._state.addState('run-end', () => {
             //游动结束了 
             controller.fishOver('run-end', this._index);
         })
@@ -102,6 +104,12 @@ class Fish extends Animate {
                 //取出来第一个点
                 if (this._currentTargetPoint == undefined) {
                     let point = this._pathPointList.shift();
+                    //目标位置 需要在调整一下
+
+                    point = {
+                        x: point.x,
+                        y: point.y
+                    }
                     this._currentTargetPoint = new Vec2(point.x, point.y);
 
 
@@ -117,17 +125,27 @@ class Fish extends Animate {
                         let angle = new Vec2(0, 1).getRadians(direction);
                         // let angle = direction.getAngle(new Vec2(0, 1));
                         // console.log('angle = ', angle);
-                        let disAngle = angle + Math.PI * 0.5 - this.rotation  ;
+                        // if (angle < 0){
+                        //     console.log('大转向');
+                        // }
+                        let disAngle = (angle + Math.PI * 0.5 - this.rotation) % (Math.PI * 2);
                         // this.rotation = angle + Math.PI * 0.5;
 
-                        this.rotation += Math.abs(disAngle * 0.1) *  (disAngle / Math.abs(disAngle));
+                        this.rotation += Math.abs(disAngle * 0.1) * (disAngle / Math.abs(disAngle));
 
                     } else {
                         let point = this._pathPointList.shift();
+
+                        //目标位置 需要在调整一下
+                        point = {
+                            x: point.x,
+                            y: point.y
+                        }
+
                         this._currentTargetPoint = new Vec2(point.x, point.y);
                     }
                 }
-            }else{
+            } else {
                 this._state.setState('run-end');
             }
         }

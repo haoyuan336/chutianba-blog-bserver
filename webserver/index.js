@@ -9,6 +9,9 @@ const itemClick = function(obj){
     console.log('click' + obj.key);
     GameContent.showGame(obj.key);
 }
+let randomList =  ['cut-fruit', 'catch-fish']
+
+GameContent.showGame(randomList[Math.round(Math.random() * (randomList.length - 1))]);
 ReactDOM.render(
     <Layout>
       <Header className="header">
