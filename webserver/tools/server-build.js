@@ -1,9 +1,11 @@
 var exec = require('child_process').exec;
 // var cmdStr = 'curl http://www.weather.com.cn/data/sk/101010100.html';
-let str = "rm -rf /root/chutianbawebserver/server/public/games/dist/"
-let cmdStr = "mv /root/chutianbawebserver/webserver/dist/ /root/chutianbawebserver/server/public/games"
-function process(cmd, cb) {
-    exec(cmdStr, function (err, stdout, stderr) {
+
+// let str = "rm -rf /root/chutianbawebserver/server/public/games/dist/"
+// let cmdStr = "mv /root/chutianbawebserver/webserver/dist/ /root/chutianbawebserver/server/public/games"
+function processStr(cmd, cb) {
+    console.log('cmd = ' + cmd);
+    exec(cmd, function (err, stdout, stderr) {
         if (err) {
             console.log('get weather api error:' + stderr);
         } else {
@@ -20,8 +22,35 @@ function process(cmd, cb) {
     });
 }
 
-process(str, function(){
-    process(cmdStr, function(){
-        console.log('运行成功');
-    });
-})
+let targetPath = process.argv[2];
+
+let gamePath = ['index.html', 'games', 'dist'];
+let strList = [];
+for (let i = 0; i < gamePath.length; i++) {
+    let s = '-rf';
+    if (gamePath[i].indexOf('.') !== -1) {
+        s = '-f';
+    }
+    strList.push(
+
+        'cp ' + s + ' ' + gamePath[i] + ' ' + targetPath
+    )
+}
+let strEnd = 'scp -r ' + 'game-path' +'  root@chutianba.xyz:/root/webserver/public'
+strList.push(strEnd)
+
+// processStr(strList.shift(), () => {
+
+// })
+
+const enter = function () {
+    if (strList.length > 0) {
+
+        let str = strList.shift();
+
+        processStr(str, () => {
+            enter();
+        })
+    }
+}
+enter();

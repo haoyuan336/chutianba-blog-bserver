@@ -28,5 +28,8 @@ class Label extends PIXI.Text{
     setText(text){
         this.text = text;
     }
+    update(){
+        
+    }
 }
 export default Label

@@ -127,6 +127,9 @@ class Graphics extends PIXI.Graphics {
         this.endFill();
 
     }
+    update(){
+        
+    }
     addChild(child) {
         this._childList.push(child);
     }

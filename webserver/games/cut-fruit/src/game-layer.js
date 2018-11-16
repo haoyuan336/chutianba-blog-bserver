@@ -11,7 +11,11 @@ class GameLayer extends Layer {
         this._state = new State();
         this._state.setState('ready');
         this._addFruitCurrentTime = 0;
-        let bg = new PIXI.Sprite(global.resource[resources.bj].texture);
+        let bg = new Sprite(global.resource[resources.bj].texture);
+        bg.position = {
+            x: director.designSize.width * 0.5,
+            y: director.designSize.height * 0.5
+        }
         this.addChild(bg);
   
         // director.root.ticker.add(this.update.bind(this));
@@ -49,6 +53,9 @@ class GameLayer extends Layer {
             })
         }
         this._cutTrail = new PIXI.mesh.Rope(global.resource[resources.blade].texture, this._cutPoint);
+        this._cutTrail.update = function(){
+
+        }
         this._cutTrail.blendmode = PIXI.BLEND_MODES.ADD;
         this._cutTrailLayer.addChild(this._cutTrail);
 
@@ -107,9 +114,9 @@ class GameLayer extends Layer {
             this._cutTrail.visible = false;
         }
 
-        for (let i in this._fruitMap){
-            this._fruitMap[i].update(dt);
-        }
+        // for (let i in this._fruitMap){
+        //     this._fruitMap[i].update(dt);
+        // }
     }
     addOneFruit() {
         //添加一个水果

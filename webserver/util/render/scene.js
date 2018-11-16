@@ -6,9 +6,18 @@ class Scene extends PIXI.Container {
         this.nowTime = new Date().getTime();
         this.childLayerList = [];
     }
+    recursiveChild(object, dt) {
+        if (object.update && object.ClassType !== 'animate') {
+            object.update(dt);
+        }
+        for (let i = 0; i < object.children.length; i++) {
+            this.recursiveChild(object.children[i], dt);
+        }
+    }
     update(dt) {
         for (let i = 0; i < this.childLayerList.length; i++) {
-            this.childLayerList[i].update(dt);
+            // this.childLayerList[i].update(dt);
+            this.recursiveChild(this.childLayerList[i], dt);
         }
     }
     addLayer(layer) {
