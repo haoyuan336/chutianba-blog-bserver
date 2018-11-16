@@ -38,14 +38,13 @@ ReactDOM.render(
               <Menu.Item  onClick = {itemClick} key="catchfish-online">多人在线捕鱼达人</Menu.Item>
               <Menu.Item  onClick = {itemClick} key="sicong">校长吃鸡</Menu.Item>
               <Menu.Item  onClick = {itemClick} key="sicong-nify">校长飞镖</Menu.Item>
+              <Menu.Item  onClick = {itemClick} key="sicong-fruit">校长大战水果</Menu.Item>
               <Menu.Item  onClick = {itemClick} key="snake-">贪吃蛇</Menu.Item>
               <Menu.Item  onClick = {itemClick} key="snake-online">贪吃蛇online</Menu.Item>
               <Menu.Item  onClick = {itemClick} key="fly-fight-online">飞机大战</Menu.Item>
               <Menu.Item  onClick = {itemClick} key="doudizhu-online">斗地主online</Menu.Item>
               <Menu.Item  onClick = {itemClick} key="wuziqi">五子棋</Menu.Item>
               <Menu.Item  onClick = {itemClick} key="wuziqi-online">五子棋online</Menu.Item>
-
-
             </SubMenu>
             <SubMenu key="sub3" title={<span><Icon type="notification" />打算做的游戏</span>}>
               <Menu.Item  onClick = {itemClick} key="9">斗地主</Menu.Item>

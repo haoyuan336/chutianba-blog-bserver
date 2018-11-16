@@ -23,12 +23,9 @@ class SiCong extends Sprite {
     onTouchMove(event) {
         if (this._isTouching && this._state.getState() == 'run') {
             let data = event.data.getLocalPosition(this._controller);
-            // this.position = {
-            //     x: data.x,
-            //     y: data.y
-            // }
+           
             if (this._oldTouch == undefined){
-                this._oldTouch = data;
+                this._oldTouch = this.position;
             }
             let direction = {
                 x: data.x - this._oldTouch.x,
