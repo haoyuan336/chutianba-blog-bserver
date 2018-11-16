@@ -6,8 +6,9 @@ const EnemyType = {
     'check_1': 'check_1'
 }
 class Enemy extends Sprite{
-    constructor(){
-        super();
+    constructor(type){
+        super(global.resource[resources[type]].texture);
+        this.scale.set(0.5);
     }
 }
 

@@ -18,7 +18,7 @@ ReactDOM.render(
     <Layout>
       <Header className="header">
         <div className="logo">
-        <label style={{color:"#ffffff" ,fontSize: "40px"}}><strong>小游戏合集</strong></label>
+        <label style={{color:"#ffffff" ,fontSize: "40px"}}><strong>学习编程</strong></label>
         </div>
       </Header>
       <Layout>
@@ -81,7 +81,8 @@ ReactDOM.render(
                 
             }}>
             
-              {/* <a href=""></a> */}
+              <strong>源码地址：<a href="https://github.com/haoyuan336/chutianbawebserver">https://github.com/haoyuan336/chutianbawebserver</a></strong>
+             
             </div>
 
           </Content>

@@ -57,9 +57,7 @@ class GameLayer extends Layer {
                 bg.position.x = this._bgList[i ? 1 : 0].position.x + bg.width * 2;
             }
         }
-        // for (let i = 0; i < this.children.length; i++) {
-        //     this.children[i].update(dt);
-        // }
+
         if (this._state.getState() == 'run') {
             this.addEnemy(dt);
         }
@@ -100,13 +98,15 @@ class GameLayer extends Layer {
             } else {
                 this._addEnemyTime += dt;
             }
-
         }
-
     }
 
     addOneEnemy(type) {
         let enemy = new Enemy(type, this);
+        enemy.position = {
+            x: director.designSize.width * 0.5,
+            y: director.designSize.height * 0.5
+        }
         this.addChild(enemy);
     }
     getWaveConfig() {
