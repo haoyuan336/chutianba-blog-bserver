@@ -128,7 +128,7 @@ class Fish extends Animate {
                         // if (angle < 0){
                         //     console.log('大转向');
                         // }
-                        let disAngle = (angle + Math.PI * 0.5 - this.rotation) % (Math.PI * 2);
+                        let disAngle = (angle + Math.PI * 0.5 - this.rotation) % (Math.PI * 0.5);
                         // this.rotation = angle + Math.PI * 0.5;
 
                         this.rotation += Math.abs(disAngle * 0.1) * (disAngle / Math.abs(disAngle));
