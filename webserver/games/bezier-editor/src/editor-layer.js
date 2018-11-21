@@ -13,7 +13,7 @@ class EditorLayer extends Layer {
         }));
         this.graphics.addChild(bgRect);
 
-        let rect = new Shape(ShapeType.Rect, 1920 * 0.5 -1024 * 0.5,1280 * 0.5 -660 * 0.5, 1024, 640, new Style({
+        let rect = new Shape(ShapeType.Rect, 1920 * 0.5 - 1024 * 0.5, 1280 * 0.5 - 660 * 0.5, 1024, 640, new Style({
             fill: 0xFFFFFF,
             alpha: 0.5,
             lineWidth: 6,
@@ -27,9 +27,9 @@ class EditorLayer extends Layer {
         this._pathPointList = [];
     }
     update(dt) {
-        if (this.graphics) {
-            this.graphics.update(dt);
-        }
+        // if (this.graphics) {
+        //     this.graphics.update(dt);
+        // }
     }
     onTouchStart(event) {
         let data = event.data.getLocalPosition(this);
@@ -99,7 +99,7 @@ class EditorLayer extends Layer {
         // console.log('export' + JSON.stringify(this._));
 
         let pathList = [];
-        for (let i = 0 ; i < this._pointList.length ; i ++){
+        for (let i = 0; i < this._pointList.length; i++) {
             pathList.push({
                 x: this._pointList[i].x - (1920 * 0.5 - 1024 * 0.5),
                 y: this._pointList[i].y - (1280 * 0.5 - 640 * 0.5)
@@ -107,19 +107,17 @@ class EditorLayer extends Layer {
         }
 
         var textToWrite = JSON.stringify(pathList);
-        var textFileAsBlob = new Blob([textToWrite], {type:'application/json'});
+        var textFileAsBlob = new Blob([textToWrite], { type: 'application/json' });
         var fileNameToSaveAs = 'fish_path_0.json';
         var downloadLink = document.createElement("a");
         downloadLink.download = fileNameToSaveAs;
         downloadLink.innerHTML = "Download File";
-        if (window.webkitURL != null)
-        {
+        if (window.webkitURL != null) {
             // Chrome allows the link to be clicked
             // without actually adding it to the DOM.
             downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
         }
-        else
-        {
+        else {
             // Firefox requires the link to be added to the DOM
             // before it can be clicked.
             downloadLink.href = window.URL.createObjectURL(textFileAsBlob);

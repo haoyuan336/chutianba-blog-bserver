@@ -1,6 +1,7 @@
 import {Sprite} from './../../../util/import'
 import resources from './../resources'
 import global from './../../global'
+import EnemyAi from './enemy-ai'
 const EnemyType = {
     'check_0': 'check_0',
     'check_1': 'check_1'

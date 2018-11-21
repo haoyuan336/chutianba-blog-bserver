@@ -13,7 +13,7 @@ const itemClick = function(obj){
 // let randomList =  ['cut-fruit', 'catch-fish']
 
 // GameContent.showGame(randomList[Math.round(Math.random() * (randomList.length - 1))]);
-GameContent.showGame('sicong');
+GameContent.showGame('path-editor');
 ReactDOM.render(
     <Layout>
       <Header className="header">
@@ -52,6 +52,7 @@ ReactDOM.render(
             </SubMenu>
             <SubMenu key="sub4" title={<span><Icon type="appstore" theme="outlined" />工具</span>}>
               <Menu.Item onClick = {itemClick}  key="bezier-editor">贝塞尔曲线编辑器</Menu.Item>
+              <Menu.Item onClick = {itemClick}  key="path-editor">路径编辑器</Menu.Item>
         
 
 

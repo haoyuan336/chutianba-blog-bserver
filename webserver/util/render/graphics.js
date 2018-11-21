@@ -69,7 +69,7 @@ class Shape {
                 break;
             case ShapeType.Rect:
                 let rect = new Rect(this.x, this.y, this.width, this.heigth);
-                if (rect.isContain(x, y)){
+                if (rect.isContain(x, y)) {
                     return true;
                 }
                 break;
@@ -84,7 +84,6 @@ class Shape {
 };
 
 
-
 class Graphics extends PIXI.Graphics {
     constructor() {
         super();
@@ -93,11 +92,12 @@ class Graphics extends PIXI.Graphics {
     update(dt) {
         this.draw();
     }
-    rectDraw(x, y, width, hieght, param) {
-        let style = new Style(param);
-        this.lineStyle(style.lineWidth, style.lineColor, style.lineAlpha);
-        this.beginFill(style.fill, style.fillAlpha);
-        this.drawRect(x, y, width, hieght);
+    rectDraw(x, y, width, height, param) {
+        // let style = new Style(param);
+        // this.lineStyle(style.lineWidth, style.lineColor, style.lineAlpha);
+        // this.beginFill(style.fill, style.fillAlpha);
+        // this.drawRect(x, y, width, hieght);
+        this.addChild(new Shape(ShapeType.Rect, x, y, width, height, param));
     }
     // circleDraw(x, y, radiu, param) {
     //     let style = new Style(param);
@@ -127,18 +127,16 @@ class Graphics extends PIXI.Graphics {
         this.endFill();
 
     }
-    update(){
-        
-    }
+
     addChild(child) {
         this._childList.push(child);
     }
-    removeAllChild(){
+    removeAllChild() {
         this._childList = [];
     }
-    removeChild(child){
-        this._childList.forEach((v , k)=>{
-            if (child === v){
+    removeChild(child) {
+        this._childList.forEach((v, k) => {
+            if (child === v) {
                 this._childList.splice(k, 1);
             }
         });
