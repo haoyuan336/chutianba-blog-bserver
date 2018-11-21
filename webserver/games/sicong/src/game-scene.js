@@ -4,6 +4,7 @@ import ReadyLayer from './ready-layer'
 class GameScene extends Scene{
     constructor(){
         super();
+        this.setDesignSize(800, 480);
     }
     onLoad(){
         let gameLayer = new GameLayer();

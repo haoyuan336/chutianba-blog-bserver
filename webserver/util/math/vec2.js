@@ -30,20 +30,17 @@ class Vec2 {
     }
     return v
   }
-  add(object) {
+  add() {
     let v = new Vec2(this.x, this.y)
-    if (typeof (object) === 'object') {
-      v.x += object.x
-      v.y += object.y
+
+    if (arguments.length === 1) {
+      v.x += arguments[0].x;
+      v.y += arguments[0].y;
     } else {
-      if (arguments.length === 1) {
-        v.x += arguments[0]
-        v.y += arguments[0]
-      } else {
-        v.x += arguments[0]
-        v.y += arguments[1]
-      }
+      v.x += arguments[0];
+      v.y += arguments[1];
     }
+
 
     return v
   }
@@ -124,15 +121,15 @@ class Vec2 {
   // }
 
 
-  cross  () {
+  cross() {
     //向量积
     let object = undefined;
-    if (arguments.length == 1){
+    if (arguments.length == 1) {
       object = {
         x: arguments[0].x,
         y: arguments[0].y
       }
-    }else{
+    } else {
       object = {
         x: arguments[0],
         y: arguments[1]
@@ -140,15 +137,15 @@ class Vec2 {
     }
     return this.x * object.y - this.y * object.x;
   }
-  dot () {
+  dot() {
     //点积
     let object = undefined;
-    if (arguments.length == 1){
+    if (arguments.length == 1) {
       object = {
         x: arguments[0].x,
         y: arguments[0].y
       }
-    }else{
+    } else {
       object = {
         x: arguments[0],
         y: arguments[1]
@@ -156,15 +153,15 @@ class Vec2 {
     }
     return this.x * object.x + this.y * object.y;
   }
-  getRadians () {
+  getRadians() {
     //得到向量弧度
     let object = undefined;
-    if (arguments.length == 1){
+    if (arguments.length == 1) {
       object = {
         x: arguments[0].x,
         y: arguments[0].y
       }
-    }else{
+    } else {
       object = {
         x: arguments[0],
         y: arguments[1]

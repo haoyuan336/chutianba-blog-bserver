@@ -1,4 +1,4 @@
-import { Layer, Button, director, Vec2 } from './../../../util/import'
+import { Layer, Vec2 } from './../../../util/import'
 import { Graphics, Shape, ShapeType, Style } from './../../../util/render/graphics'
 class EditorLayer extends Layer {
     constructor() {
@@ -55,44 +55,48 @@ class EditorLayer extends Layer {
     }
     drawPath() {
 
-
+        for (let i = 0; i < this._drawPointList.length; i++) {
+            this.graphics.removeChild(this._drawPointList[i]);
+        }
+        this._drawPointList = [];
 
         if (this._controllerPointList.length < 2) {
             return;
         }
-        for (let i = 0 ; i < this._drawPointList.length ; i ++){
-            this.graphics.removeChild(this._drawPointList[i]);
-        }
-        this._drawPointList = [];
         //没添加一个控制点 都需要重新绘制路径
         // this._dra
         for (let i = 0; i < this._controllerPointList.length - 1; i++) {
             //
             let p1 = this._controllerPointList[i];
             let p2 = this._controllerPointList[i + 1];
-            let dis = new Vec2(p1.x, p1.y).distance(p2.x, p2.y);
-            let direction = new Vec2(p2.x - p1.x, p2.y - p2.y).getNormal();
-            // let currentDis = dis / Math.floor(dis / 10);
-            let count = Math.floor(dis / 10);
-            let currentDis = dis / count;
-            let list = [new Vec2(p1.x, p1.y)];
-            for (let j = 1 ; j < count - 2; j ++ ){
-                let p = list[j - 1].add(direction.multi(currentDis));
-                list.push(p);
+            let v1 = new Vec2(p1.x, p1.y);
+            let v2 = new Vec2(p2.x, p2.y);
 
-                let circle = new Shape(ShapeType.Circle, p.x, p.y, 5, {fill: 0x0000ff});
+            let dis = v1.distance(v2);
+            let direction = v2.sub(v1).getNormal();
+            // let currentDis = dis / Math.floor(dis / 10);
+            let count = Math.round(dis / 20);
+            let currentDis = dis / count;
+            let list = [v1];
+            for (let j = 1; j < count - 1; j++) {
+                let currentV = direction.multi(currentDis);
+                let p = list[j - 1].add(currentV);
+
+                let circle = new Shape(ShapeType.Circle, p.x, p.y, 5, { fill: 0x0000ff });
                 this.graphics.addChild(circle);
                 this._drawPointList.push(circle);
+                list.push(p);
+
             }
         }
     }
     onTouchMove(event) {
         if (this._currentPoint) {
-            console.log('包含');
             let data = event.data.getLocalPosition(this);
             this._currentPoint.x = data.x;
             this._currentPoint.y = data.y;
         }
+        this.drawPath();
     }
     onTouchEnd() {
         this._currentPoint = undefined;
@@ -104,9 +108,38 @@ class EditorLayer extends Layer {
             this.graphics.removeChild(this._controllerPointList[i]);
         }
         this._controllerPointList = [];
+        this.drawPath();
     }
     exportCb() {
         console.log('export');
+        let pathList = [];
+        for (let i = 0; i < this._controllerPointList.length; i++) {
+            pathList.push({
+                x: this._controllerPointList[i].x - (1920 * 0.5 - 1024 * 0.5),
+                y: this._controllerPointList[i].y - (1280 * 0.5 - 640 * 0.5)
+            })
+        }
+
+        var textToWrite = JSON.stringify(pathList);
+        var textFileAsBlob = new Blob([textToWrite], { type: 'application/json' });
+        var fileNameToSaveAs = 'fish_path_0.json';
+        var downloadLink = document.createElement("a");
+        downloadLink.download = fileNameToSaveAs;
+        downloadLink.innerHTML = "Download File";
+        if (window.webkitURL != null) {
+            // Chrome allows the link to be clicked
+            // without actually adding it to the DOM.
+            downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+        }
+        else {
+            // Firefox requires the link to be added to the DOM
+            // before it can be clicked.
+            downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+            downloadLink.onclick = destroyClickedElement;
+            downloadLink.style.display = "none";
+            document.body.appendChild(downloadLink);
+        }
+        downloadLink.click();
     }
 
 }

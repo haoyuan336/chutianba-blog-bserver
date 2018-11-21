@@ -10,6 +10,8 @@ class Enemy extends Sprite{
     constructor(type){
         super(global.resource[resources[type]].texture);
         this.scale.set(0.5);
+        this._enemyAi = new EnemyAi(this);
+
     }
 }
 
