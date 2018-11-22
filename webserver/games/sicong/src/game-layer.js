@@ -1,12 +1,13 @@
-import { Layer, Sprite, director, State } from './../../../util/import'
+import { Layer, Sprite, director, State, Vec2 } from './../../../util/import'
 import global from './../../global'
 import resources from './../resources'
 import SiCong from './sicong'
 import HotDog from './hot-dog'
 import Enemy from './enemy'
 class GameLayer extends Layer {
-    constructor() {
+    constructor(controller) {
         super();
+        this._controller = controller;
         this._bgList = [];
         for (let i = 0; i < 2; i++) {
             let bg = new Sprite(global.resource[resources.bg].texture);
@@ -36,7 +37,14 @@ class GameLayer extends Layer {
         this._enemyTypeNum = 0;
         this._addEnemyTime = 0;
 
+        this._enemyList = [];
 
+        this._state.addState('game-over', ()=>{
+            console.log('游戏结束');
+            if (this._gameConfig){
+                this._gameConfig.gameOver();
+            }
+        })
     }
     addBullt() {
         let bullet = new HotDog();
@@ -50,6 +58,7 @@ class GameLayer extends Layer {
         return bullet;
     }
     update(dt) {
+
         for (let i = 0; i < this._bgList.length; i++) {
             let bg = this._bgList[i];
             bg.position.x -= dt * 0.04;
@@ -60,7 +69,22 @@ class GameLayer extends Layer {
 
         if (this._state.getState() == 'run') {
             this.addEnemy(dt);
+
+
+            for (let i = 0 ; i < this._enemyList.length ; i ++){
+                let enemy = this._enemyList[i];
+                let v1 = new Vec2(enemy.position.x, enemy.position.y);
+                let v2 = new Vec2(this._siCong.position.x, this._siCong.position.y);
+                let dis = v1.distance(v2);
+                console.log('dis = ' , dis);
+                if (dis < (enemy.width + this._siCong) * 0.5){
+                    //相交
+                    this._state.setState('game-over');
+                }
+                
+            }
         }
+
     }
     addEnemy(dt) {
         if (!this._waveConfig) {
@@ -103,11 +127,8 @@ class GameLayer extends Layer {
 
     addOneEnemy(type) {
         let enemy = new Enemy(type, this);
-        enemy.position = {
-            x: director.designSize.width * 0.5,
-            y: director.designSize.height * 0.5
-        }
         this.addChild(enemy);
+        this._enemyList.push(enemy);
     }
     getWaveConfig() {
         if (this._currentLevelNum < Object.keys(this._gameConfig).length) {
@@ -141,5 +162,15 @@ class GameLayer extends Layer {
         this._state.setState('run');
     }
 
+    enemyRunEnd(enemy){
+        // this._enemyList.
+        for (let i = 0 ; i < this._enemyList.length ; i ++){
+            if (this._enemyList[i] == enemy){
+                this._enemyList.splice(i, 1);
+                console.log('删除敌人');
+            }
+        }
+        this.removeChild(enemy);
+    }
 }
 export default GameLayer;

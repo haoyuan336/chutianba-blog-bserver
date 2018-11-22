@@ -4,19 +4,19 @@
             {
                 "type": "check_0",
                 "count": 10,
-                "duraction": 200
+                "duraction": 600
             }
         ],
         [
             {
                 "type": "check_0",
                 "count": 10,
-                "duraction": 200
+                "duraction": 600
             },
             {
                 "type": "check_1",
                 "count": 10,
-                "duraction": 300
+                "duraction": 800
             }
         ]
     ],
@@ -25,24 +25,24 @@
             {
                 "type": "check_0",
                 "count": 10,
-                "duraction": 200
+                "duraction": 600
             },
             {
                 "type": "check_1",
                 "count": 10,
-                "duraction": 300
+                "duraction": 800
             }
         ],
         [
             {
                 "type": "check_0",
                 "count": 10,
-                "duraction": 200
+                "duraction": 600
             },
             {
                 "type": "check_1",
                 "count": 10,
-                "duraction": 300
+                "duraction": 800
             }
         ]
     ]

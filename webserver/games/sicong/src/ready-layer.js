@@ -45,5 +45,8 @@ class ReadyLayer extends Layer {
         })
         enterEffect.start();
     }
+    showReady(){
+        this.enterEffect();
+    }
 }
 export default ReadyLayer;

@@ -107,6 +107,7 @@ class Vec2 {
 
     return l
   }
+  getDistance = this.distance
   // getAngle() {
   //   let vec = undefined;
   //   if (arguments.length == 1) {

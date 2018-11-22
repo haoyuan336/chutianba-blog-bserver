@@ -7,12 +7,17 @@ class GameScene extends Scene{
         this.setDesignSize(800, 480);
     }
     onLoad(){
-        let gameLayer = new GameLayer();
-        this.addLayer(gameLayer);
+        this.gameLayer = new GameLayer(this);
+        this.addLayer(this.gameLayer);
 
 
-        let readyLayer = new ReadyLayer(gameLayer);
-        this.addLayer(readyLayer);
+        this.readyLayer = new ReadyLayer(this.gameLayer);
+        this.addLayer(this.readyLayer);
+    }
+    gameOver(){
+        if (this.readyLayer){
+            this.readyLayer.showReady();
+        }
     }
     
 }
