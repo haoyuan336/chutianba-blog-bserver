@@ -9,6 +9,7 @@ class GameLayer extends Layer {
         super();
         this._controller = controller;
         this._bgList = [];
+
         for (let i = 0; i < 2; i++) {
             let bg = new Sprite(global.resource[resources.bg].texture);
             bg.position = {
@@ -58,29 +59,35 @@ class GameLayer extends Layer {
         return bullet;
     }
     update(dt) {
+    
 
-        for (let i = 0; i < this._bgList.length; i++) {
-            let bg = this._bgList[i];
-            bg.position.x -= dt * 0.04;
-            if ((bg.position.x + bg.width * 0.5) < 0) {
-                bg.position.x = this._bgList[i ? 1 : 0].position.x + bg.width * 2;
-            }
-        }
+       
 
         if (this._state.getState() == 'run') {
             this.addEnemy(dt);
-
+            for (let i = 0; i < this._bgList.length; i++) {
+                let bg = this._bgList[i];
+                bg.position.x -= dt * 0.04;
+                if ((bg.position.x + bg.width * 0.5) < 0) {
+                    bg.position.x = this._bgList[i ? 1 : 0].position.x + bg.width * 2;
+                }
+            }
 
             for (let i = 0 ; i < this._enemyList.length ; i ++){
                 let enemy = this._enemyList[i];
-                let v1 = new Vec2(enemy.position.x, enemy.position.y);
-                let v2 = new Vec2(this._siCong.position.x, this._siCong.position.y);
-                let dis = v1.distance(v2);
-                console.log('dis = ' , dis);
-                if (dis < (enemy.width + this._siCong) * 0.5){
-                    //相交
-                    this._state.setState('game-over');
-                }
+                let r1 = enemy.getBounds();
+                let r2 = this._siCong.getBounds();
+
+                
+                // let v1 = new Vec2(enemy.position.x, enemy.position.y);
+                // let v2 = new Vec2(this._siCong.position.x, this._siCong.position.y);
+                // let dis = v1.distance(v2);
+                // console.log('dis = ' , dis);
+                // if (dis < (enemy.width + this._siCong.width) * 0.5){
+                //     //相交
+                //     this._state.setState('game-over');
+                // }
+                // let r1 = enemy.get
                 
             }
         }

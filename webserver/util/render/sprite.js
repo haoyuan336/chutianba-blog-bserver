@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js'
+import Rect from './../math/rect'
 class Sprite extends PIXI.Sprite{
     constructor(texture, textureInfo){
         let frame = {
@@ -35,6 +36,18 @@ class Sprite extends PIXI.Sprite{
     }
     onTouchEnd(){
         
+    }
+    getBounds(){
+        /**
+         * 返回一个矩形
+         * 
+         */
+        return new Rect(
+            this.position.x - this.width * this.anchor.x,
+            this.position.y - this.height * this.anchor.y,
+            this.width,
+            this.height
+        )
     }
 }
 export default Sprite;
