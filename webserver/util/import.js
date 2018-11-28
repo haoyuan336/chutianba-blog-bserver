@@ -10,4 +10,5 @@ import Bezier from './math/bezier'
 import Rect from './math/rect'
 import Vec2 from './math/vec2'
 import State from './common/state'
-export {Animate, Button, director, Layer, Scene, Sprite, Bezier, Rect, Vec2, State};
+import SpriteFrame from './render/sprite-frame'
+export { Animate, Button, director, Layer, Scene, Sprite, Bezier, Rect, Vec2, State, SpriteFrame };

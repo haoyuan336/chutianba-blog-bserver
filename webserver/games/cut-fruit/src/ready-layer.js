@@ -2,7 +2,7 @@ import Layer from './../../../util/render/layer'
 import global from './../../global'
 import resources from './../resources'
 import Button from './../../../util/render/button'
-import Sprite from './../../../util/render/sprite'
+import Sprite from '../../../util/render/sprite'
 import director from './../../../util/render/director'
 import TWEEN from 'tween.js'
 class ReadyLayer extends Layer {

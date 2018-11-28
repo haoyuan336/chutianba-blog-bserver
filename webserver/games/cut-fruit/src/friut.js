@@ -1,6 +1,6 @@
 
 import Layer from './../../../util/render/layer'
-import Sprite from './../../../util/render/sprite'
+import Sprite from '../../../util/render/sprite'
 import FruitType from './fruit-type'
 import global from './../../global'
 import resources from './../resources'

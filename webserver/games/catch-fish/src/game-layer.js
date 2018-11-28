@@ -1,5 +1,5 @@
 import Layer from './../../../util/render/layer'
-import Sprite from './../../../util/render/sprite'
+import Sprite from '../../../util/render/sprite'
 import resources from './../resources'
 import global from './../../global'
 import Fish from './fish'
@@ -29,6 +29,8 @@ class GameLayer extends Layer {
 
         this._uiLayer = new UILayer(this);
         this.addChild(this._uiLayer);
+
+
         
     }
     update(dt) {

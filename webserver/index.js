@@ -13,7 +13,7 @@ const itemClick = function(obj){
 // let randomList =  ['cut-fruit', 'catch-fish']
 
 // GameContent.showGame(randomList[Math.round(Math.random() * (randomList.length - 1))]);
-GameContent.showGame('sicong');
+GameContent.showGame('catch-fish');
 ReactDOM.render(
     <Layout>
       <Header className="header">

@@ -38,9 +38,9 @@ class Rect {
                 arguments[2],
                 arguments[3]);
         }
-        // if (this.x <){
+          if (this.x < obj.x && obj.x - this.x < this.width){
 
-        // }
+        }
     }
 };
 export default Rect;

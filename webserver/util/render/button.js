@@ -8,7 +8,19 @@ const TouchType = {
     Alpha: 3
 }
 class Button extends Layer {
-    constructor(spec, cb) {
+    constructor(spec) {
+        /**
+         * text 按钮的默认label
+         * touchType 按钮按下的效果形式
+         * normalTexture 按钮的正常纹理
+         * pressedTexture 按钮的按下纹理
+         * normalScale 按钮的原始大小 
+         * pressedTexture 按钮的按下的大小
+         * normalAlpha 按钮的原始透明值
+         * pressedAlpha 按钮的按下的透明值
+         * touchCb 按钮的回调
+         * 
+         */
         super();
 
         this._buttonStyle = {
