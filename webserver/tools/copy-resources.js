@@ -38,22 +38,28 @@ function processStr(cmd, cb) {
         }
     });
 }
-
 const createDir = function (dir, cb) {
     processStr('mkdir ' + dir, cb);
 }
-createDir('./game-path/games/', ()=>{
-    for (let i = 0; i < pathList.length; i++) {
-        createDir('./game-path/games/' + pathList[i]);
-        processStr('cp -rf ' + path  + '/'+ pathList[i] + '/images/' + ' ' + './game-path/games/' + pathList[i] + '/images', () => {
-            console.log('success');
-        })
-    }
+processStr('rm -rf ./game-path/*', ()=>{
+    createDir('./game-path/games/', ()=>{
+        for (let i = 0; i < pathList.length; i++) {
+            createDir('./game-path/games/' + pathList[i]);
+            processStr('cp -rf ' + path  + '/'+ pathList[i] + '/images/' + ' ' + './game-path/games/' + pathList[i] + '/images', () => {
+                console.log('success');
+            })
+        }
+    });
 });
+
+
 
 processStr('cp -rf dist ./game-path/', ()=>{
 
 });
 processStr('cp -f index.html ./game-path/', ()=>{
+
+});
+processStr('scp -r ./game-path/* root@chutianba.xyz:/root/webserver/public', ()=>{
 
 });
