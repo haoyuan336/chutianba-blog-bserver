@@ -36,8 +36,8 @@ for (let i = 0; i < gamePath.length; i++) {
         'cp ' + s + ' ' + gamePath[i] + ' ' + targetPath
     )
 }
-let strEnd = 'scp -r ' + 'game-path' +'  root@chutianba.xyz:/root/webserver/public'
-strList.push(strEnd)
+// let strEnd = 'scp -r ' + 'game-path' +'  root@chutianba.xyz:/root/webserver/public'
+// strList.push(strEnd)
 
 // processStr(strList.shift(), () => {
 
