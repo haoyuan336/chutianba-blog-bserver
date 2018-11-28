@@ -3,7 +3,7 @@ import global from './../../global'
 import resource from './../resources'
 import texturespackInfo from './../texturepacker-source-map'
 import TextureInfo from './../../common/texture-info'
-import Gun from './gun'
+// import Gun from './gun'
 
 class UILayer extends Layer {
     constructor(controller) {
@@ -20,8 +20,8 @@ class UILayer extends Layer {
         bg.position.y = director.designSize.height - 65;
 
 
-        this._gun = new Gun();
-        this.addChild(this._gun);
+        // this._gun = new Gun();
+        // this.addChild(this._gun);
     }
 }
 export default UILayer;

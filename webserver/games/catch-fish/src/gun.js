@@ -6,10 +6,10 @@ import PackageTexture from './common/package-texture'
 class Gun extends Layer {
     constructor(texture) {
         super(texture);
-        let addButton = new Button({
-            normalTexture: PackageTexture(texturePackerSourceMap.cannonMinus)
-        });
-        this.addChild(addButton);
+        // let addButton = new Button({
+        //     normalTexture: PackageTexture(texturePackerSourceMap.cannonMinus)
+        // });
+        // this.addChild(addButton);
     }
 
 
