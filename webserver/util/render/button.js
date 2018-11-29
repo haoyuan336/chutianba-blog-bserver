@@ -47,17 +47,19 @@ class Button extends Layer {
                 this._buttonStyle[key] = spec[key] ? spec[key] : this._buttonStyle[key];
             }
 
-            if(spec.click){
+            if (spec.click) {
                 this._buttonStyle.touchCb = spec.click;
             }
         }
 
         if (this._buttonStyle.normalTexture) {
             this._sprite = new Sprite(this._buttonStyle.normalTexture);
+            if (this._buttonStyle.normalTexture.textureInfo) {
+                this._sprite.width = this._buttonStyle.normalTexture.textureInfo.rotate ? this._buttonStyle.normalTexture.height : this._buttonStyle.normalTexture.width;
+                this._sprite.height = this._buttonStyle.normalTexture.textureInfo.rotate ? this._buttonStyle.normalTexture.width : this._buttonStyle.normalTexture.height;
 
+            }
 
-            this._sprite.width = this._buttonStyle.normalTexture.textureInfo.rotate ? this._buttonStyle.normalTexture.height : this._buttonStyle.normalTexture.width;
-            this._sprite.height = this._buttonStyle.normalTexture.textureInfo.rotate ? this._buttonStyle.normalTexture.width : this._buttonStyle.normalTexture.height;
 
 
             this.addChild(this._sprite);

@@ -2,14 +2,15 @@ import { Animate, Bezier, Vec2 } from './../../../util/import'
 import global from './../../global'
 import sourcesMap from './../texturepacker-source-map'
 import State from './../../common/state'
-import PackageTexture from './common/package-texture'
+import PackageTexture from '../../common/package-texture'
 import { FishPath } from './fish-type'
+import resources from './../resources'
 function getTextureList(fishName, type) {
     let list = [];
     for (let i = 0; i < 10; i++) {
         let str = 'fish_' + fishName + '_' + type + '_' + i;
         if (sourcesMap[str]) {
-            list.push(new PackageTexture(sourcesMap[str]));
+            list.push(new PackageTexture(  resources.json_texturepacker,sourcesMap[str]));
         }
     }
     return list;
