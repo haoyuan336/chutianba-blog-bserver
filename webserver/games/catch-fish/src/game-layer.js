@@ -6,7 +6,6 @@ import Fish from './fish'
 import { FishType, FishWeight } from './fish-type'
 import UILayer from './ui-layer'
 import Bullet from './bullet'
-import { director } from '../../../util/import';
 class GameLayer extends Layer {
     constructor() {
         super();

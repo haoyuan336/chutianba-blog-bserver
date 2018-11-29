@@ -1,7 +1,8 @@
 import { Layer, Animate, Vec2, director } from './../../../util/import'
 import texturePackerSourceMap from './../texturepacker-source-map'
-import PackageTexture from './common/package-texture'
+import PackageTexture from '../../common/package-texture'
 import global from './../../global'
+import resources from './../resources'
 class Gun extends Layer {
     constructor(texture) {
         super(texture);
@@ -23,7 +24,7 @@ class Gun extends Layer {
         }
     }
     _getTexture(str) {
-        let texture = new PackageTexture(texturePackerSourceMap[str]);
+        let texture = new PackageTexture(resources.json_texturepacker ,texturePackerSourceMap[str]);
         return texture;
     }
     _getTextureList(level) {

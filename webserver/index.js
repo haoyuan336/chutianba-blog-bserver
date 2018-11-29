@@ -13,7 +13,8 @@ const itemClick = function(obj){
 // let randomList =  ['cut-fruit', 'catch-fish']
 
 // GameContent.showGame(randomList[Math.round(Math.random() * (randomList.length - 1))]);
-GameContent.showGame('catch-fish');
+// GameContent.showGame('catch-fish');
+GameContent.showGame('protect-radish');
 ReactDOM.render(
     <Layout>
       <Header className="header">
@@ -32,9 +33,10 @@ ReactDOM.render(
           >
             <SubMenu  key="sub1" title={<span><Icon type="trophy" theme="outlined" />完成的游戏</span>}>
               <Menu.Item onClick = {itemClick} key="cut-fruit">切水果</Menu.Item>
+              <Menu.Item onClick = {itemClick} key="catch-fish">捕鱼达人</Menu.Item>
+
             </SubMenu>
             <SubMenu key="sub2" title={<span><Icon type="laptop" />正在做的游戏</span>}>
-              <Menu.Item onClick = {itemClick} key="catch-fish">捕鱼达人</Menu.Item>
               <Menu.Item  onClick = {itemClick} key="catchfish-online">多人在线捕鱼达人</Menu.Item>
               <Menu.Item  onClick = {itemClick} key="sicong">校长吃鸡</Menu.Item>
               <Menu.Item  onClick = {itemClick} key="sicong-nify">校长飞镖</Menu.Item>
@@ -45,6 +47,8 @@ ReactDOM.render(
               <Menu.Item  onClick = {itemClick} key="doudizhu-online">斗地主online</Menu.Item>
               <Menu.Item  onClick = {itemClick} key="wuziqi">五子棋</Menu.Item>
               <Menu.Item  onClick = {itemClick} key="wuziqi-online">五子棋online</Menu.Item>
+              <Menu.Item  onClick = {itemClick} key="protect-radish">保卫萝卜</Menu.Item>
+
             </SubMenu>
             <SubMenu key="sub3" title={<span><Icon type="notification" />打算做的游戏</span>}>
               <Menu.Item  onClick = {itemClick} key="9">斗地主</Menu.Item>

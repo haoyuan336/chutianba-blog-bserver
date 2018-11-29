@@ -2,15 +2,15 @@ import { Animate, Bezier, Vec2 } from './../../../util/import'
 import global from './../../global'
 import sourcesMap from './../texturepacker-source-map'
 import State from './../../common/state'
-import PackageTexture from './common/package-texture'
+import PackageTexture from '../../common/package-texture'
 import { FishPath } from './fish-type'
-
+import resources from './../resources'
 function getTextureList(fishName, type) {
     let list = [];
     for (let i = 0; i < 10; i++) {
         let str = 'fish_' + fishName + '_' + type + '_' + i;
         if (sourcesMap[str]) {
-            list.push(new PackageTexture(sourcesMap[str]));
+            list.push(new PackageTexture(  resources.json_texturepacker,sourcesMap[str]));
         }
     }
     return list;
@@ -56,6 +56,9 @@ class Fish extends Animate {
         this._pathPointList = Bezier(bezierController, 0, 100).getPoints(100);
         this.position = this._pathPointList[0];
         this.anchor.set(0.5);
+
+
+
     }
     fishUpdate(dt) {
         if (this._state.getState() === 'run') {

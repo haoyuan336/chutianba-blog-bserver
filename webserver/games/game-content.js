@@ -3,9 +3,13 @@ import {
     CatchFish,
     LoadScene,
     SiCong,
+    ProtectRadish,
+
     CutFruitResources,
     CatchFishResources,
     SiCongResources,
+    ProtectRadishResources,
+
     BezierEditor,
     PathEditor
 } from './game-import'
@@ -31,12 +35,14 @@ class GameContent {
             'catch-fish': CatchFish,
             'bezier-editor': BezierEditor,
             'sicong': SiCong,
-            'path-editor': PathEditor
+            'path-editor': PathEditor,
+            'protect-radish': ProtectRadish
         }
         let resourceMap = {
             'cut-fruit': CutFruitResources,
             'catch-fish': CatchFishResources,
             'sicong': SiCongResources,
+            'protect-radish': ProtectRadishResources,
             'bezier-editor': {},
             'path-editor': {}
         }
