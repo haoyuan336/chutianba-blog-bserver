@@ -4,7 +4,6 @@ import sourcesMap from './../texturepacker-source-map'
 import State from './../../common/state'
 import PackageTexture from './common/package-texture'
 import { FishPath } from './fish-type'
-
 function getTextureList(fishName, type) {
     let list = [];
     for (let i = 0; i < 10; i++) {
@@ -56,6 +55,9 @@ class Fish extends Animate {
         this._pathPointList = Bezier(bezierController, 0, 100).getPoints(100);
         this.position = this._pathPointList[0];
         this.anchor.set(0.5);
+
+
+
     }
     fishUpdate(dt) {
         if (this._state.getState() === 'run') {
