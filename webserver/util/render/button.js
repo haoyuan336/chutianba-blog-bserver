@@ -47,6 +47,9 @@ class Button extends Layer {
                 this._buttonStyle[key] = spec[key] ? spec[key] : this._buttonStyle[key];
             }
 
+            if(spec.click){
+                this._buttonStyle.touchCb = spec.click;
+            }
         }
 
         if (this._buttonStyle.normalTexture) {

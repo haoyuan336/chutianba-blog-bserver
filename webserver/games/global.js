@@ -1,4 +1,6 @@
+import {EventListener} from './../util/import'
 const global = {
-    resource: []
+    resource: [],
+    event: new EventListener()
 };
 export default global;

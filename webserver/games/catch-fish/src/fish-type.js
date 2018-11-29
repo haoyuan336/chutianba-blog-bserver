@@ -9,7 +9,7 @@ const FishType = {
     jinshayu: 'jinshayu',
     red: 'red',
     shayu: 'shayu',
-    // shuimu: 'shuimu',
+    shuimu: 'shuimu',
     yellow: 'yellow'
 
 };
