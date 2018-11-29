@@ -12,6 +12,14 @@ class UILayer extends Layer {
         super();
         this._controller = controller;
 
+
+        let bigBg = new Sprite(global.resource[resource.game_bg].texture);
+        this.addChild(bigBg);
+        bigBg.alpha = 0;
+        bigBg.position = {
+            x: director.designSize.width * 0.5,
+            y: director.designSize.height * 0.5
+        }
         //首先放一个炮台的背景
         let bg = new Sprite(
             global.resource[resource.texturespack].texture,
@@ -20,21 +28,14 @@ class UILayer extends Layer {
         this.addChild(bg);
         bg.position.x = director.designSize.width * 0.5;
         bg.position.y = director.designSize.height - 65;
-
-
         this._gun = new Gun();
-        this._gun.position = {
-            x: director.designSize.width * 0.5 + 40,
-            y: director.designSize.height - 30
-        };
         this.addChild(this._gun);
-
-
         let addButton = new Button({
             normalTexture: new PackageTexture(texturePackerSourceMap.cannonPlus),
             pressedTexture: new PackageTexture(texturePackerSourceMap.cannonPlusDown),
-            click: ()=>{
+            click: () => {
                 console.log('加 按钮');
+                this._gun.addLevel('+');
             }
         });
         addButton.position = {
@@ -46,8 +47,10 @@ class UILayer extends Layer {
         let subButton = new Button({
             normalTexture: new PackageTexture(texturePackerSourceMap.cannonMinus),
             pressedTexture: new PackageTexture(texturePackerSourceMap.cannonMinusDown),
-            click: ()=>{
+            click: () => {
                 console.log('减 按钮');
+                this._gun.addLevel('-');
+
             }
         });
         subButton.position = {
@@ -55,6 +58,12 @@ class UILayer extends Layer {
             y: director.designSize.height - 40
         }
         this.addChild(subButton);
+        this.interactive = true;
+    }
+    onTouchStart(event) {
+        let data = event.data.getLocalPosition(this);
+        // console.log('touch', data);
+        this._gun.shoot(data);
     }
 }
 export default UILayer;

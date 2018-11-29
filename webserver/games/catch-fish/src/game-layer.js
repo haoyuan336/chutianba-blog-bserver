@@ -19,11 +19,6 @@ class GameLayer extends Layer {
         //浴池的列表
         this._fishPoolList = [];
         //初始化 浴池列表
-
-        // let fish = new Fish('jinshayu');
-        // this.addChild(fish);
-        // this._fishMap[this._fishIdCount] = fish;
-        // this._fishIdCount++;
         this._fishLayer = new Layer();
         this.addChild(this._fishLayer);
 
@@ -31,7 +26,10 @@ class GameLayer extends Layer {
         this.addChild(this._uiLayer);
 
 
-        
+        global.event.on('shoot-bullet', this.shootBullet);
+    }
+    shootBullet(level){
+        console.log('shoot bullet ', level);
     }
     update(dt) {
         if (this._addFishTime > 1000) {
