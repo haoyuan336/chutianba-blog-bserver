@@ -1,73 +1,46 @@
 import { Animate, Bezier, Vec2 } from './../../../util/import'
 import global from './../../global'
 import sourcesMap from './../texturepacker-source-map'
-import TextureInfo from './../../common/texture-info'
-import resources from './../resources'
 import State from './../../common/state'
+import PackageTexture from './common/package-texture'
 import { FishPath } from './fish-type'
+
+function getTextureList(fishName, type) {
+    let list = [];
+    for (let i = 0; i < 10; i++) {
+        let str = 'fish_' + fishName + '_' + type + '_' + i;
+        if (sourcesMap[str]) {
+            list.push(new PackageTexture(sourcesMap[str]));
+        }
+    }
+    return list;
+}
 class Fish extends Animate {
     constructor(spec) {
+        //首先取出这条鱼的 游动的纹理
+
         let fishName = spec.fishName;
         let controller = spec.controller;
-        //首先取出来鱼跑的动画 跟鱼死的 动画
-        let runTextureName = [];
-        let deadTextureName = [];
-        for (let i = 0; i < 10; i++) {
-            let runName = 'fish_' + fishName + '_run' + '_' + i;
-            let deadName = 'fish_' + fishName + '_dead' + '_' + i;
-            if (sourcesMap[runName]) {
-                runTextureName.push(sourcesMap[runName]);
-            }
-            if (sourcesMap[deadName]) {
-                deadTextureName.push(sourcesMap[deadName]);
-            }
-        }
-
-        //取出来所有的纹理
-        let textureNameList = runTextureName.concat(deadTextureName);
-        let textureList = [];
-        let textureInfoList = [];
-        for (let i = 0; i < textureNameList.length; i++) {
-            // let texture = new text
-            let textureInfo = new TextureInfo(resources.json_texturepacker, textureNameList[i]);
-            let texture = new PIXI.Texture(global.resource[resources.texturespack].texture, textureInfo.frame, undefined, undefined, textureInfo.rotate);
-
-            textureList.push(texture);
-            textureInfoList.push(
-                {
-                    texture: texture,
-                    textureInfo: textureInfo
-                }
-            )
-        }
-        //收集到所有的纹理后来创建动画 
-        super(textureList);
+        let runTextureList = getTextureList(fishName, 'run');
+        let deadTextureList = getTextureList(fishName, 'dead');
+        super(runTextureList);
         this._index = index;
         this._controller = controller;
         this._index = spec.index;
-
-        this._textureInfoList = textureInfoList;
-        this.loop = false;
+        this._runTextureList = runTextureList;
+        this._deadTextureList = deadTextureList;
         this.animationSpeed = 0.1;
-        this.animateFrameNum = {
-            run: {
-                start: 0,
-                length: runTextureName.length
-            },
-            dead: {
-                start: runTextureName.length,
-                length: deadTextureName.length
-            }
-        }
-
         this._state = new State();
         this._state.addState('run', () => {
-
-
+            this.textures = this._runTextureList;
             this.play();
         })
         this._state.addState('dead', () => {
-            this.gotoAndPlay(this.animateFrameNum.dead.start);
+            // this.gotoAndPlay(this.animateFrameNum.dead.start);
+            this.stop();
+            this.textures = this._deadTextureList;
+            this.loop = false;
+            this.gotoAndPlay(0);
         });
 
         this._state.addState('run-end', () => {
@@ -84,35 +57,18 @@ class Fish extends Animate {
         this.position = this._pathPointList[0];
         this.anchor.set(0.5);
     }
-    onFrameChange() {
-
-
-    }
     fishUpdate(dt) {
         if (this._state.getState() === 'run') {
-            let textureInfo = this._textureInfoList[this.currentFrame];
-            this.width = textureInfo.texture.width;
-            this.height = textureInfo.texture.height;
-            if (textureInfo.textureInfo.rotate == 2) {
-                this.width = textureInfo.texture.height;
-                this.height = textureInfo.texture.width;
-            }
-            if (this.currentFrame === this.animateFrameNum.run.length) {
-                this.gotoAndPlay(0);
-            }
             if (this._pathPointList.length !== 0) {
                 //取出来第一个点
                 if (this._currentTargetPoint == undefined) {
                     let point = this._pathPointList.shift();
                     //目标位置 需要在调整一下
-
                     point = {
                         x: point.x,
                         y: point.y
                     }
                     this._currentTargetPoint = new Vec2(point.x, point.y);
-
-
                 }
                 if (this._currentTargetPoint) {
                     let dis = this._currentTargetPoint.distance(this.position);
@@ -123,16 +79,8 @@ class Fish extends Animate {
                             y: this.position.y + direction.y * dt / 10
                         }
                         let angle = new Vec2(0, 1).getRadians(direction);
-                        // let angle = direction.getAngle(new Vec2(0, 1));
-                        // console.log('angle = ', angle);
-                        // if (angle < 0){
-                        //     console.log('大转向');
-                        // }
                         let disAngle = (angle + Math.PI * 0.5 - this.rotation) % (Math.PI * 0.5);
-                        // this.rotation = angle + Math.PI * 0.5;
-
                         this.rotation += Math.abs(disAngle * 0.1) * (disAngle / Math.abs(disAngle));
-
                     } else {
                         let point = this._pathPointList.shift();
 
