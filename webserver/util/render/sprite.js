@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js'
 import Rect from '../math/rect'
-class Sprite extends PIXI.Sprite{
-    constructor(texture, textureInfo){
+class Sprite extends PIXI.Sprite {
+    constructor(texture, textureInfo) {
         let frame = {
             x: 0,
             y: 0,
@@ -9,15 +9,19 @@ class Sprite extends PIXI.Sprite{
             height: texture.height
         }
         let rotate = 0;
-        if (textureInfo){
-            frame = textureInfo.frame ? textureInfo.frame: frame;
-            rotate = textureInfo.rotate ? textureInfo.rotate: rotate;
+        let spriteFrame;
+        if (textureInfo) {
+            frame = textureInfo.frame ? textureInfo.frame : frame;
+            rotate = textureInfo.rotate ? textureInfo.rotate : rotate;
+            spriteFrame = new PIXI.Texture(texture, frame, undefined, undefined, rotate);
+        }else{
+            spriteFrame = texture;
         }
-        let spriteFrame = new PIXI.Texture(texture, frame, undefined, undefined, rotate);
-        texture.rotation = Math.PI;
+
+        // texture.rotation = Math.PI;
         super(spriteFrame);
-        this.width = rotate?frame.height: frame.width;
-        this.height = rotate?frame.width: frame.height;
+        this.width = rotate ? frame.height : frame.width;
+        this.height = rotate ? frame.width : frame.height;
         this.anchor.set(0.5);
 
         this.on('pointerdown', this.onTouchStart.bind(this))
@@ -25,19 +29,19 @@ class Sprite extends PIXI.Sprite{
             .on('pointerupoutside', this.onTouchEnd.bind(this))
             .on('pointermove', this.onTouchMove.bind(this));
     }
-    update(dt){
+    update(dt) {
 
     }
-    onTouchStart(){
+    onTouchStart() {
 
     }
-    onTouchMove(){
+    onTouchMove() {
 
     }
-    onTouchEnd(){
-        
+    onTouchEnd() {
+
     }
-    getBounds(){
+    getBounds() {
         /**
          * 返回一个矩形
          * 

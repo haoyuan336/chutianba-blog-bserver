@@ -51,15 +51,20 @@ class Button extends Layer {
 
         if (this._buttonStyle.normalTexture) {
             this._sprite = new Sprite(this._buttonStyle.normalTexture);
+
+
+            this._sprite.width = this._buttonStyle.normalTexture.textureInfo.rotate ? this._buttonStyle.normalTexture.height : this._buttonStyle.normalTexture.width;
+            this._sprite.height = this._buttonStyle.normalTexture.textureInfo.rotate ? this._buttonStyle.normalTexture.width : this._buttonStyle.normalTexture.height;
+
+
             this.addChild(this._sprite);
         } else {
-            // this._shape = new Shape(ShapeType.Rect, 0,0, 400,400);
-            // this._graphics = new Graphics();
-            // this.addChild(this._graphics);
-            // this._graphics.addChild(this._shape);
             this._graphics = new Graphics();
             this.addChild(this._graphics);
             this._graphics.rectDraw(-50, - 30, 100, 60);
+        }
+        if (this._buttonStyle.pressedTexture) {
+            this._buttonStyle.touchType = TouchType.Sprite;
         }
 
         let label = new Label(this._buttonStyle.text, {
@@ -77,21 +82,13 @@ class Button extends Layer {
     onTouchStart() {
         switch (this._buttonStyle.touchType) {
             case TouchType.Sprite:
-                this._sprite.texture = this.pressedTexture;
+                this._sprite.texture = this._buttonStyle.pressedTexture;
                 break;
             case TouchType.Scale:
                 this.scale.set(this._buttonStyle.pressedScale);
-                // if (this._sprite) {
-                //     this._sprite.scale.set(this._buttonStyle.pressedScale);
-
-                // }
-                // if (this._graphics) {
-                //     console.log('重画');
-                //     this.                    
-                // }
                 break;
             case TouchType.Alpha:
-                this._sprite.alpha = this.pressedAlpha;
+                this._sprite.alpha = this._buttonStyle.pressedAlpha;
                 break;
             default:
                 break;
@@ -100,7 +97,7 @@ class Button extends Layer {
     onTouchEnd() {
         switch (this._buttonStyle.touchType) {
             case TouchType.Sprite:
-                this._sprite.texture = this.normalTexture;
+                this._sprite.texture = this._buttonStyle.normalTexture;
 
                 break;
             case TouchType.Scale:

@@ -12,4 +12,4 @@ class TextureInfo {
         }
     }
 }
-export default TextureInfo
+export default TextureInfo;

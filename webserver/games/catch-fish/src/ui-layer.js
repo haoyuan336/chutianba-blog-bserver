@@ -1,9 +1,11 @@
-import { Layer, Sprite, director } from './../../../util/import'
+import { Layer, Sprite, director, Button } from './../../../util/import'
 import global from './../../global'
 import resource from './../resources'
 import texturespackInfo from './../texturepacker-source-map'
 import TextureInfo from './../../common/texture-info'
-// import Gun from './gun'
+import Gun from './gun'
+import PackageTexture from './common/package-texture'
+import texturePackerSourceMap from './../texturepacker-source-map'
 
 class UILayer extends Layer {
     constructor(controller) {
@@ -20,8 +22,39 @@ class UILayer extends Layer {
         bg.position.y = director.designSize.height - 65;
 
 
-        // this._gun = new Gun();
-        // this.addChild(this._gun);
+        this._gun = new Gun();
+        this._gun.position = {
+            x: director.designSize.width * 0.5 + 40,
+            y: director.designSize.height - 30
+        };
+        this.addChild(this._gun);
+
+
+        let addButton = new Button({
+            normalTexture: new PackageTexture(texturePackerSourceMap.cannonPlus),
+            pressedTexture: new PackageTexture(texturePackerSourceMap.cannonPlusDown),
+            click: ()=>{
+                console.log('加 按钮');
+            }
+        });
+        addButton.position = {
+            x: director.designSize.width * 0.5 + 100,
+            y: director.designSize.height - 40
+        }
+        this.addChild(addButton);
+
+        let subButton = new Button({
+            normalTexture: new PackageTexture(texturePackerSourceMap.cannonMinus),
+            pressedTexture: new PackageTexture(texturePackerSourceMap.cannonMinusDown),
+            click: ()=>{
+                console.log('减 按钮');
+            }
+        });
+        subButton.position = {
+            x: director.designSize.width * 0.5 - 20,
+            y: director.designSize.height - 40
+        }
+        this.addChild(subButton);
     }
 }
 export default UILayer;
