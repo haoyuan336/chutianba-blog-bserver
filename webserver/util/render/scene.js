@@ -10,6 +10,9 @@ class Scene extends PIXI.Container {
         if (object.update && object.ClassType !== 'animate') {
             object.update(dt);
         }
+        if(object.animateUpdate){
+            object.animateUpdate(dt);
+        }
         for (let i = 0; i < object.children.length; i++) {
             this.recursiveChild(object.children[i], dt);
         }
