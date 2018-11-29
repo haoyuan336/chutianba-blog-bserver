@@ -23,7 +23,6 @@ class Gun extends Layer {
         }
     }
     _getTexture(str) {
-        console.log('str ', str);
         let texture = new PackageTexture(texturePackerSourceMap[str]);
         return texture;
     }
@@ -58,7 +57,17 @@ class Gun extends Layer {
         this._animate.gotoAndPlay(0);
         this._animate.onComplete = function(){
         }
-        global.event.fire('shoot-bullet', this._level);
+
+        //根据大炮的指向 给打出去的炮弹一个 其实位置
+        let startPos = animateVec.add(direction.multi(100));
+
+        global.event.fire('shoot-bullet', {
+            level: this._level,
+            startPos: startPos,
+            endPos: point,
+            angle: angle,
+            direction: direction
+        });
 
     }
 

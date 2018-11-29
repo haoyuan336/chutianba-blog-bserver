@@ -5,6 +5,8 @@ import global from './../../global'
 import Fish from './fish'
 import { FishType, FishWeight } from './fish-type'
 import UILayer from './ui-layer'
+import Bullet from './bullet'
+import { director } from '../../../util/import';
 class GameLayer extends Layer {
     constructor() {
         super();
@@ -25,11 +27,24 @@ class GameLayer extends Layer {
         this._uiLayer = new UILayer(this);
         this.addChild(this._uiLayer);
 
+        global.event.on('shoot-bullet', this.shootBullet.bind(this));
 
-        global.event.on('shoot-bullet', this.shootBullet);
+
+        this._bulletMap = {};
+        this._bulletIndex = 1;
     }
-    shootBullet(level){
-        console.log('shoot bullet ', level);
+    shootBullet(data){
+        data.controller = this;
+        data.index = this._bulletIndex;
+        let bullet = new Bullet(data);
+        this.addChild(bullet);
+        this._bulletMap[this._bulletIndex] = bullet;
+        this._bulletIndex ++;
+
+    }
+    removeBullet(index){
+        this.removeChild(this._bulletMap[index]);
+        delete this._bulletMap[index];
     }
     update(dt) {
         if (this._addFishTime > 1000) {
