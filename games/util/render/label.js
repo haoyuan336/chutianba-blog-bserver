@@ -1,4 +1,3 @@
-import * as PIXI from 'pixi.js'
 class Label extends PIXI.Text{
     constructor(str, spec){
         let style = {

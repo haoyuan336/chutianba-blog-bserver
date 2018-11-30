@@ -3,7 +3,6 @@ import resources from './../resources'
 import State from './../../common/state'
 import Fruit from './friut'
 import FruitType from './fruit-type'
-import TWEEN from 'tween.js'
 import {Layer, Sprite, director, Vec2} from './../../../util/import'
 class GameLayer extends Layer {
     constructor() {

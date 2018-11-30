@@ -1,4 +1,3 @@
-import * as PIXI from 'pixi.js'
 class SpriteFrame extends PIXI.Texture {
     constructor(packageTexture, textureInfo) {
         // let textureInfo = new TextureInfo(resources.json_texturepacker, textureNameList[i]);

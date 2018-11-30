@@ -1,4 +1,3 @@
-import * as PIXI from 'pixi.js'
 import global from './../global'
 import {director} from './../../util/import'
 class LoadScene extends PIXI.Container {

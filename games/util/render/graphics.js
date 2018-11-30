@@ -1,4 +1,3 @@
-import * as PIXI from 'pixi.js'
 import Vec2 from './../math/vec2'
 import Rect from './../math/rect'
 const ShapeType = {

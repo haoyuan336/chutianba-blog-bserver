@@ -1,4 +1,3 @@
-import * as PIXI from 'pixi.js'
 import Rect from '../math/rect'
 class Sprite extends PIXI.Sprite {
     constructor(texture, textureInfo) {
