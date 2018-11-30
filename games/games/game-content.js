@@ -19,7 +19,7 @@ import {director} from './../util/import'
 class GameContent {
     constructor() {
 
-        director.init(800, 480);
+        director.init(710, 480);
     }
     showApp(){
         director.showApp(document.getElementById('game-div'));
