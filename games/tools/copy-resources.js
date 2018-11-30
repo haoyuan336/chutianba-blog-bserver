@@ -47,16 +47,17 @@ processStr('rm -rf ./game-path/*', ()=>{
             createDir('./game-path/games/' + pathList[i]);
             processStr('cp -rf ' + path  + '/'+ pathList[i] + '/images/' + ' ' + './game-path/games/' + pathList[i] + '/images', () => {
                 console.log('success');
-                processStr('cp -rf ./libs/ ./game-path/', ()=>{
+                processStr('cp -rf ./libs ./game-path/', ()=>{
                     processStr('cp -r game.all.js ./game-path/', ()=>{
                         processStr('cp -f index.html ./game-path/', ()=>{
-                            processStr('scp -r ./game-path/* root@chutianba.xyz:/root/webserver/public', ()=>{
-                
-                            });
+                           
                         });
                     });
                 });
             })
         }
     });
+});
+processStr('scp -r ./game-path/* root@chutianba.xyz:/root/webserver/public', ()=>{
+                
 });
