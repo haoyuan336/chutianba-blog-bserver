@@ -1,15 +1,36 @@
-<header class="main-header" <% if(theme.banner.img){ %> style="background-image:url(<%= theme.banner.img %>)" <%}%> >
+<header class="main-header" <% if(theme.banner.img){ %> style="background-image:url(
+    <%= theme.banner.img %>)"
+    <%}%> >
     <div class="main-header-box">
         <a class="header-avatar" href="/" title='<%= config.author %>'>
             <%- image_tag('img/avatar.jpg',{alt:'logo头像',class:'img-responsive center-block'}) %>
         </a>
         <div class="branding">
-        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            <!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
             <% if(theme.branding){ %>
-                <h2> <%= theme.branding %> </h2>
+            <h2>
+                <%= theme.branding %>
+            </h2>
             <% } else { %>
-                 <%- image_tag('img/branding.png',{alt:'Snippet 博客主题',class:'img-responsive center-block'}) %>
+            <%- image_tag('img/branding.png',{alt:'Snippet 博客主题',class:'img-responsive center-block'}) %>
             <% } %>
-    	</div>
+        </div>
     </div>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-123456789",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130092116-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-130092116-1');
+    </script>
 </header>
