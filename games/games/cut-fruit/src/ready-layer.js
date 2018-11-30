@@ -1,7 +1,6 @@
 import global from './../../global'
 import resources from './../resources'
 import {Layer, Button, Sprite, director} from './../../../util/import'
-import TWEEN from 'tween.js'
 class ReadyLayer extends Layer {
     constructor(readyCb) {
         super();

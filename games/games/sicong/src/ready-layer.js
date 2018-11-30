@@ -1,5 +1,4 @@
 import { Layer, Button, director } from './../../../util/import'
-import TWEEN from 'tween.js'
 class ReadyLayer extends Layer {
     constructor(gamelayer, type) {
         super();

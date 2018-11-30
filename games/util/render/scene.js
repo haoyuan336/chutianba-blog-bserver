@@ -1,4 +1,3 @@
-import * as PIXI from 'pixi.js'
 import director from './director'
 class Scene extends PIXI.Container {
     constructor() {

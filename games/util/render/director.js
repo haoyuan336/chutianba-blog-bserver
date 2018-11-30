@@ -1,5 +1,3 @@
-import * as PIXI from 'pixi.js'
-import TWEEN from 'tween.js'
 class Director{
     init(width, height){
         this.width = width;

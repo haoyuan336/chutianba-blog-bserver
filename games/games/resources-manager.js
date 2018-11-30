@@ -1,4 +1,3 @@
-import * as PIXI from 'pixi.js'
 export class ResourceManager{
     constructor(){
         this.resources = {};
