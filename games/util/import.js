@@ -15,5 +15,7 @@ import Rect from './math/rect'
 import Vec2 from './math/vec2'
 import State from './common/state'
 
+import helper from './common/helper'
+
 import EventListener from './common/event-listener'
-export { Animate, Button, director, Layer, Scene, Sprite, Bezier, Rect, Vec2, State, SpriteFrame , EventListener};
+export { Animate, Button, director, Layer, Scene, Sprite, Bezier, Rect, Vec2, State, SpriteFrame , EventListener, helper};
