@@ -200,8 +200,8 @@ changyan:
 ## Valine评论
 valine:
    enable: true
-   appId: xOKV9J4UeQAtVkvnJC7Kq2Jn-gzGzoHsz
-   appKey: erIpQac4azoCmgfBB7Dl9maa
+   appId: blBS2x6B7YmovF7UsBvm0jJo-gzGzoHsz
+   appKey: aMi0mu5Bf4D3TRdN9I1hegHE
    placeholder: 说点什么吧
    notify: false
    verify: false
