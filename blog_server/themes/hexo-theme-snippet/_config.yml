@@ -8,15 +8,15 @@ menu:
 - page: home
   url: /
   icon:
-- page: 前端
-  url: /categories/前端/
-  icon:
-- page: 后端
-  url: /categories/后端/
-  icon:
-- page: 工具
-  url: /categories/工具/
-  icon:
+# - page: 前端
+#   url: /categories/前端/
+#   icon:
+# - page: 后端
+#   url: /categories/后端/
+#   icon:
+# - page: 工具
+#   url: /categories/工具/
+#   icon:
 - page: 时间轴
   url: /archives/
   icon:
@@ -68,22 +68,23 @@ notification: |-
 social:
  - name: Github
    icon: git
-   href: //github.com/shenliyang
+   href: //github.com/haoyuan336
  - name: 邮箱
    icon: envelope-o
    href: mailto:snippet@91h5.cc
  - name: 联系QQ
    icon: qq
-   href: /
+   href: 328387458
  - name: 微信
    icon: weixin
-   href: /
+   href: haoyuan336
  - name: QQ群
-   icon: users
-   href: /
- - name: RSS
-   icon: feed
-   href: /atom.xml
+   icon: QQ群
+   href: 328387458
+
+ - name: bilibili
+   icon: 视频
+   href: /haoyuan336
 
 ## 文章分类设置
 cate_config:
@@ -160,7 +161,7 @@ declaration:
 ## 文章打赏
 reward:
   alipay: ''
-  wepay: '../img/reward-wepay.png'
+  wepay: './img/reward-wepay.png'
   tip: 赞赏是不耍流氓的鼓励
 
 ## 主题评论
@@ -199,8 +200,8 @@ changyan:
 ## Valine评论
 valine:
    enable: true
-   appId: xOKV9J4UeQAtVkvnJC7Kq2Jn-gzGzoHsz
-   appKey: erIpQac4azoCmgfBB7Dl9maa
+   appId: blBS2x6B7YmovF7UsBvm0jJo-gzGzoHsz
+   appKey: aMi0mu5Bf4D3TRdN9I1hegHE
    placeholder: 说点什么吧
    notify: false
    verify: false
