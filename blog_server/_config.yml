@@ -73,6 +73,8 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
+# theme: hexo-theme-aira
+# theme: hexo-theme-A-RSnippet
 theme: hexo-theme-snippet
 
 # Deployment
