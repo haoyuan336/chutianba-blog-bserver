@@ -3,3 +3,6 @@ webserver/game-path
 node_modules
 games/game-path
 game.all.js
+webserver/dist/common.js
+webserver/dist/index.css
+webserver/dist/index.js
