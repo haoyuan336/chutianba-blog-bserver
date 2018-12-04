@@ -228,7 +228,7 @@ tencent_analytics:
 baidu_site_verification:
 
 ### 百度自动推送
-baidu_push: false
+baidu_push: true
 
 #网站主题配置
 since: 2017
