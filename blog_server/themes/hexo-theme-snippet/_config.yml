@@ -157,7 +157,7 @@ declaration:
 ## 文章打赏
 reward:
   alipay: ''
-  wepay: '../img/reward-wepay.png'
+  wepay: '/img/WechatIMG5.jpeg'
   tip: 赞赏是不耍流氓的鼓励
 
 ## 主题评论
