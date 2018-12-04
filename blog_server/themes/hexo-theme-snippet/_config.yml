@@ -157,7 +157,7 @@ declaration:
 ## 文章打赏
 reward:
   alipay: ''
-  wepay: '../img/reward-wepay.png'
+  wepay: '/img/WechatIMG5.jpeg'
   tip: 赞赏是不耍流氓的鼓励
 
 ## 主题评论
@@ -207,13 +207,13 @@ valine:
 
 ## 网站访客统计
 visit_counter:
-   site: false
-   page: false
+   site: true
+   page: true
 
 ## 网站访问统计分析
 
 ### 网盟CNZZ统计
-cnzz_analytics: 1263868967
+cnzz_analytics: 
 
 ### 百度统计
 baidu_analytics:
@@ -228,7 +228,7 @@ tencent_analytics:
 baidu_site_verification:
 
 ### 百度自动推送
-baidu_push: false
+baidu_push: true
 
 #网站主题配置
 since: 2017
