@@ -1,0 +1,64 @@
+{% block comment %}
+{% if page.comment !== false %}
+<div class="comments" id="comments">
+  {% if theme.comment.disqus_shortname %}
+  <script defer id="dsq-count-scr" src="//{{ theme.comment.disqus_shortname }}.disqus.com/count.js"></script>
+  {% if not is_home() %}
+  <div id="disqus_thread" class="disqus_thread"></div>
+  <script type="text/javascript">
+  var disqus_config = function () {
+    this.page.url = "{{ page.permalink }}";
+    this.page.identifier = "{{ page.path }}";
+  };
+  (function() {
+    var d = document, s = d.createElement("script");
+    s.src = "https://{{ theme.comment.disqus_shortname }}.disqus.com/embed.js";
+    s.setAttribute("data-timestamp", +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+  </script>
+  {% endif %}
+  {% elif theme.comment.commentjs.enable %}
+  {% if not is_home() %}
+  <div class="commentjs" id="comment-thread"></div>
+  <link rel="stylesheet" href="{% if theme.lib_cdn.enable and theme.lib_cdn.commentjs.css %}{{ theme.lib_cdn.commentjs.css }}{% else %}{{ url_for("css/commentjs.css") }}{% endif %}">
+  <script defer type="text/javascript" src="{% if theme.lib_cdn.enable and theme.lib_cdn.marked %}{{ theme.lib_cdn.marked }}{% else %}{{ url_for("js/marked.min.js") }}{% endif %}"></script>
+  <script defer type="text/javascript" src="{% if theme.lib_cdn.enable and theme.lib_cdn.timeago %}{{ theme.lib_cdn.timeago }}{% else %}{{ url_for("js/timeago.min.js") }}{% endif %}"></script>
+  <script defer type="text/javascript" src="{% if theme.lib_cdn.enable and theme.lib_cdn.highlight %}{{ theme.lib_cdn.highlight }}{% else %}{{ url_for("js/highlight.min.js") }}{% endif %}"></script>
+  <script defer type="text/javascript" src="{% if theme.lib_cdn.enable and theme.lib_cdn.commentjs.js %}{{ theme.lib_cdn.commentjs.js }}{% else %}{{ url_for("js/commentjs.js") }}{% endif %}"></script>
+  <script type="text/javascript">
+  $(document).ready(function () {
+    getComments({
+      "type": "{{ theme.comment.commentjs.type }}",
+      "user": "{{ theme.comment.commentjs.user }}",
+      "repo": "{{ theme.comment.commentjs.repo }}",
+      "client_id": "{{ theme.comment.commentjs.client_id }}",
+      "client_secret": "{{ theme.comment.commentjs.client_secret }}",
+      "no_comment": "{{ __("commentjs.none") }}",
+      "go_to_comment": "{{ __("commentjs.comment") }}",
+      "issue_title": "{{ __(page.title) }}",
+      "btn_class": "button",
+      "comments_target": "#comment-thread"
+    });
+    marked.setOptions({
+      "highlight": function (code, lang) {
+        return hljs.highlightAuto(code).value;
+      }
+    });
+    function mark() {
+      var markdowns = document.getElementsByClassName("markdown");
+      for (var i = 0; i < markdowns.length; ++i){
+        if (markdowns[i].innerHTML) {
+          markdowns[i].innerHTML = marked(markdowns[i].innerHTML);
+        }
+      }
+    }
+    window.addEventListener("DOMContentLoaded", mark, false);
+    window.addEventListener("load", mark, false);
+  });
+  </script>
+  {% endif %}
+  {% endif %}
+</div>
+{% endif %}
+{% endblock %}

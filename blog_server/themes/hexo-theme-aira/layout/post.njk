@@ -1,0 +1,90 @@
+{% extends "_layout.njk" %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for("css/page.css") }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for("css/post.css") }}">
+{% endblock %}
+
+{% block title %}{{ page.title }} | {{ config.title }}{% if config.subtitle %} - {{ config.subtitle }}{% endif %}{% endblock %}
+
+{% block content %}
+<div id="post" class="page">
+  {% set post = page %}
+  <article class="article post card{% if theme.animate %} animate{% endif %}" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="{{ config.url }}{{ url_for(page.path) }}">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+       <meta itemprop="name" content="{{ config.author }}">
+       <meta itemprop="description" content="{{ config.description }}">
+       <meta itemprop="image" content="{{ url_for(theme.avatar) }}">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+       <meta itemprop="name" content="{{ config.title }}">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">{{ page.title }}</h1>
+      <div class="post-meta">
+        {% if page.date %}
+        <span class="post-date">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="{{ moment(post.date).format() }}">{{ date(post.date, config.date_format) }} {{ time(post.date, config.time_format) }}</time></span>
+        </span>
+        {% endif %}
+        {% if page.categories and page.categories.toArray().length %}
+        {% if page.date %}
+        <span class="post-meta-divider divider">|</span>
+        {% endif %}
+        <span class="post-categories">
+          {# About `-`: https://mozilla.github.io/nunjucks/cn/templating.html#part-861ece9d8e5ce60c #}
+          {% for cat in page.categories.toArray() -%}
+          {% if loop.first %}<i class="far fa-folder-open"></i>{% else %}<i class="fas fa-angle-right"></i>{% endif %}<span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="{{ url_for(cat.path) }}" itemprop="url" rel="index"><span itemprop="name">{{ cat.name }}</span></a></span>
+          {%- endfor %}
+        </span>
+        {% endif %}
+        {% if page.comment !== false and theme.comment.enable %}
+        {% if theme.comment.disqus_shortname %}
+        {% if page.categories or page.date %}
+        <span class="post-meta-divider divider">|</span>
+        {% endif %}
+        <span class="post-comment-count">
+          <i class="far fa-comments"></i><span><a href="{{ url_for(page.path) }}#disqus_thread" itemprop="discussionUrl"><span class="post-comment-count disqus-comment-count" data-disqus-identifier="{{ page.path }}" itemprop="commentCount"></span></a></span>
+        </span>
+        {% endif %}
+        {% endif %}
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      {{ page.content }}
+    </main>
+    <footer class="post-footer">
+      {% if page.tags and page.tags.toArray().length %}
+      <div class="post-tags">
+        {% for tag in page.tags.toArray() %}
+        <a class="post-tag button" href="{{ url_for(tag.path) }}" rel="tag"><i class="fas fa-tags"></i>{{ tag.name }}</a>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </footer>
+  </article>
+  {% if theme.reward.enable %}
+  {% include "reward.njk" %}
+  {% endif %}
+  {% if page.prev or page.next %}
+  <nav class="page-nav">
+    <div class="page-nav-next page-nav-item">
+      {% if page.next %}
+      <a href="{{ url_for(page.next.path) }}" rel="next" title="{{ page.next.title }}"><i class="fas fa-angle-left"></i><span class="nav-title">{{ page.next.title }}</span></a>
+      {% endif %}
+    </div>
+    <div class="page-nav-prev page-nav-item">
+      {% if page.prev %}
+      <a href="{{ url_for(page.prev.path) }}" rel="prev" title="{{ page.prev.title }}"><span class="nav-title">{{ page.prev.title }}</span><i class="fas fa-angle-right"></i></a>
+      {% endif %}
+    </div>
+  </nav>
+  {% endif %}
+  {% if theme.comment.enable %}
+  {% include "comment.njk" %}
+  {% endif %}
+</div>
+{% endblock %}
