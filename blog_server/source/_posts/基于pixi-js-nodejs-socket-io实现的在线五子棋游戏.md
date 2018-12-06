@@ -17,4 +17,63 @@ tags:
 ```
 node ./tool/resources-gen.js ./games/wuziqi-online/
 ```
-等命令运行结束我们再看./games/wuziqi-online/这个目录，发现多了一个resource.js文件，打开文件观察一下，原来是生成了一个资源名为key，资源的路径为值的一个对象结构。具体是怎么实现的，小伙伴们可以仔细阅读./tool/resources-gen.js的源码，具体详情我就不多说了，不是今天的重点。然后我们继续，在src目录里面创建三个文件game-scene.js,game-layer.js,ui-layer.js,分别是游戏场景，游戏层，ui层。
+等命令运行结束我们再看./games/wuziqi-online/这个目录，发现多了一个resource.js文件，打开文件观察一下，原来是生成了一个资源名为key，资源的路径为值的一个对象结构。具体是怎么实现的，小伙伴们可以仔细阅读./tool/resources-gen.js的源码，具体详情我就不多说了，不是今天的重点。然后我们继续，在src目录里面创建三个文件game-scene.js,game-layer.js,ui-layer.js,分别是游戏场景，游戏层，ui层。首先在game-scene.js文件里面敲入下面代码。我将逐行讲解，每一行的含义。
+```js
+import { Scene, director } from './../../../util/import'
+import GameLayer from './game-layer'
+import UILayer from './ui-layer'
+import Socket from 'socket.io-client'
+import defines from './../../defines'
+class GameScene extends Scene {
+    constructor() {
+        super();
+        this.setDesignSize(800, 800 / director.sizeRate);
+
+    }
+    onLoad() {
+        this._gameLayer = new GameLayer(this);
+        this.addLayer(this._gameLayer);
+
+        this._uiLayer = new UILayer();
+        this.addLayer(this._uiLayer);
+         //链接服务器
+         let connect = Socket(defines.wuziqi_server_url);
+         connect.on('login-success', (id)=>{
+             console.log('login success', id);
+             if (this._uiLayer){
+                this._uiLayer.setPlayerId(id);
+             }
+         });
+         connect.on('refer-game-data', (data)=>{
+             console.log('refer game data', data);
+            if (this._uiLayer){
+                this._uiLayer.referGameData(data);
+            }
+        });
+        connect.on('sync-current-color', (color)=>{
+            console.log('同步当前的颜色', color);
+            if (this._uiLayer){
+                this._uiLayer.setCurrentColor(color);
+            }
+        });
+        connect.on('sync-board-data', (data)=>{
+            //同步棋盘的数据
+            this._gameLayer.syncBoardData(data);
+        });
+        connect.on('game-win', (color)=>{
+            console.log('游戏胜利', color);
+            this._uiLayer.showGameWin(color);
+        });
+        this._connect = connect;
+    }
+    chooseBoard(index){ 
+        if (this._connect){
+            this._connect.emit('choose-board', index);
+        }
+    }
+}
+export default GameScene;
+```
+1行，引入Scene，与director类（注意这里的director是一个实例，所以首字母为小写，这个项目的命名习惯是，类的首字母大写，实例的首字母小写），
+2行，引入GameLayer类，这个后面会补充源码，主要是渲染棋子，棋盘等
+3行，
